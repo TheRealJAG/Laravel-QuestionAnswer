@@ -13,8 +13,6 @@
 
 Auth::routes();
 
-
-
 Route::get('/', 'HomeController@index');
 
 // User Routes
