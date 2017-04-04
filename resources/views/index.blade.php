@@ -75,11 +75,4 @@
 
        </div>
 
-
-
-
-
-
 @endsection
-
-@include('modals.login')
