@@ -31,7 +31,6 @@
                     </div>
                 </div>
                 @include('containers.tags')
-
             </div>
 
             <div class="col-md-9">
