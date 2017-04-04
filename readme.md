@@ -1,4 +1,5 @@
 ## About
+A vote based Question & Answer site built using Laravel 5.4
 
 ![Alt text](/Screenshots/ScreenShot1.png?raw=true "Screanshot")
 ![Alt text](/Screenshots/ScreenShot2.png?raw=true "Screanshot")
