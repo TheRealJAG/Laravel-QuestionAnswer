@@ -2,7 +2,6 @@
 
 namespace App;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 
@@ -21,10 +20,10 @@ class Answer extends Model
     /**
      * Insert an answer
      */
-    public static function insert($answer_text, $question_id) {
+    public static function insert($answer_text, $question_id, $user_id) {
         $answer = new Answer;
         $answer->answer = $answer_text;
-        $answer->user_id = Auth::user()->id;
+        $answer->user_id = $user_id;
         $answer->question_id = $question_id;
         $answer->save();
         return $answer;

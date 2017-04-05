@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Auth;
 
 use App\Answer;
 
@@ -18,7 +19,7 @@ class AnswerController extends Controller
      */
     public function insert()
     {
-        Answer::insert(Request::get('answer'),Request::get('question_id'));
+        Answer::insert(Request::get('answer'),Request::get('question_id'),Auth::user()->id);
         return Redirect::to('question/'.Request::get('question_id').'/'.Request::get('question_url'));
 
     }
