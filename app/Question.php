@@ -2,10 +2,8 @@
 
 namespace App;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Request;
 
 class Question extends Model {
 
@@ -167,12 +165,12 @@ class Question extends Model {
      * Insert the question to the table.
      * @return object
      */
-    public static function insert() {
-        $tags = Request::get('tags');
+    public static function insert($user_id, $tags, $question_text, $level) {
+        $tags = $tags;
         $question = new Question;
-        $question->question = Request::get('question');
-        $question->level = Request::get('level');
-        $question->user_id = Auth::user()->id;
+        $question->question = $question_text;
+        $question->level = $level;
+        $question->user_id = $user_id;
         $question->save();
 
         // todo There might be a better way to handle this in Laravel
@@ -187,4 +185,3 @@ class Question extends Model {
         return $question;
     }
 }
-

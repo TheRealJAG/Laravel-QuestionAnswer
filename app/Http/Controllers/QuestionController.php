@@ -42,7 +42,7 @@ class QuestionController extends Controller
      */
     public function insert()
     {
-        $question = Question::insert();
+        $question = Question::insert(Auth::user()->id, Request::get('tags'), Request::get('question'), Request::get('level'));
         return Redirect::to('question/'.$question->id.'/'.\App\Question::get_url($question->question));
     }
 
