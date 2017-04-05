@@ -18,7 +18,7 @@ class AnswerController extends Controller
      */
     public function insert()
     {
-        Answer::insert();
+        Answer::insert(Request::get('answer'),Request::get('question_id'));
         return Redirect::to('question/'.Request::get('question_id').'/'.Request::get('question_url'));
 
     }
@@ -28,7 +28,7 @@ class AnswerController extends Controller
      * @return Response
      */
     public function update() {
-        $answer = Answer::update_answer();
+        $answer = Answer::update_answer(Request::get('pk'),Request::get('value'));
         if($answer)
             return Response::json(array('status'=>1));
         else

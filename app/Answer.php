@@ -5,7 +5,6 @@ namespace App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Request;
 
 class Answer extends Model
 {
@@ -22,11 +21,11 @@ class Answer extends Model
     /**
      * Insert an answer
      */
-    public static function insert() {
+    public static function insert($answer_text, $question_id) {
         $answer = new Answer;
-        $answer->answer = Request::get('answer');
+        $answer->answer = $answer_text;
         $answer->user_id = Auth::user()->id;
-        $answer->question_id = Request::get('question_id');
+        $answer->question_id = $question_id;
         $answer->save();
         return $answer;
     }
@@ -34,15 +33,11 @@ class Answer extends Model
     /**
      * Update an answer
      */
-    public static function update_answer() {
-        $answer_id = Request::get('pk');
-        $answer = Request::get('value');
+    public static function update_answer($answer_id,$answer) {
         $answer_data = Answer::whereId($answer_id)->first();
         $answer_data->answer = $answer;
         if($answer_data->save())
             return true;
-        else
-            return false;
     }
 
     /**
@@ -66,7 +61,6 @@ class Answer extends Model
     public static function get_answer_ids($question_id) {
         $answer_ids = Answer::select('user_id')->distinct()->where('question_id', $question_id)->get()->toArray();
 
-        // todo move this
         $answer_array = array();
         foreach($answer_ids as $var)
             $answer_array[] = $var['user_id'];
