@@ -82,6 +82,14 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="/question/ask">ASK </a></a>
                             </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Level <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/level/beginner">Beginner</a></li>
+                                    <li><a href="/level/intermediate">Intermediate</a></li>
+                                    <li><a href="/level/advanced">Advanced</a></li>
+                                </ul>
+                            </li>
                         </ul>
 
                         <ul class="nav navbar-nav navbar-right">
@@ -118,8 +126,8 @@
             <!--/.Navbar-->
 
         </div>
-
         @yield('content')
+        <P><center><a href="https://github.com/TheRealJAG/Laravel-QnA">Powered by Laravel</a></center></P>
     </div>
 
     @include('modals.login')

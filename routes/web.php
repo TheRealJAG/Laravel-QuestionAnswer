@@ -21,6 +21,11 @@ Route::get('user/{id}/questions', 'UserController@questions');
 Route::get('user/{id}/answers', 'UserController@answers');
 Route::get('user/{id}/participation', 'UserController@participation');
 
+
+// User Routes
+Route::get('level/{level}', 'LevelController@index');
+
+
 // Question Routes
 Route::get('questions/top', 'QuestionController@top');
 Route::get('questions/new', 'QuestionController@newest');

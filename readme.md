@@ -5,6 +5,25 @@ A vote based Question & Answer site built using Laravel 5.4
 ![Alt text](/public/images/screenshots/ScreenShot2.png?raw=true "Screanshot")
 ![Alt text](/public/images/screenshots/ScreenShot3.png?raw=true "Screanshot")
 
-## License
+## Stuff I Use
+https://github.com/janosgyerik/jquery-upvote
 
+## Features
+User registration
+
+User Pages
+
+Top Ranked questions page
+
+New Ranked questions page
+
+Upvote / Downvote Questions 
+
+Upvote / Downvote Answers
+
+Rank Questions by votes
+
+Rank Answers by votes
+
+## License
 This software is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).

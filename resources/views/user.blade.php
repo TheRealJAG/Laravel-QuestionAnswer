@@ -9,15 +9,9 @@
                     <div class="panel-body">
                         @if (Auth::id())
                             <ul class="sidebar-nav sidebar-divider">
-                                <li>
-                                    <a href="/user/{{Auth::id()}}/questions"><i class="fa fa-lightbulb-o" style="color: #4285F4;"></i> <strong>My Questions</strong></a>
-                                </li>
-                                <li>
-                                    <a href="/user/{{Auth::id()}}/answers"><i class="fa fa-bullhorn" style="color: #4285F4;"></i> <strong>My Answers</strong></a>
-                                </li>
-                                <li>
-                                    <a href="/user/{{Auth::id()}}/participation"><i class="fa fa-share-alt" style="color: #4285F4;"></i> <strong>My Participation</strong></a>
-                                </li>
+                                <li><a href="/user/{{Auth::id()}}/questions" title="My Questions"><i class="fa fa-lightbulb-o" style="color: #4285F4;"></i> <strong>My Questions</strong></a></li>
+                                <li><a href="/user/{{Auth::id()}}/answers" title="My Answers"><i class="fa fa-bullhorn" style="color: #4285F4;"></i> <strong>My Answers</strong></a></li>
+                                <li><a href="/user/{{Auth::id()}}/participation" title="My Participation"><i class="fa fa-share-alt" style="color: #4285F4;"></i> <strong>My Participation</strong></a></li>
                             </ul>
                         @endif
 

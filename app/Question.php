@@ -37,6 +37,7 @@ class Question extends Model {
             ->selectRaw('count(*) as total, question_id')
             ->groupBy('question_id');
     }
+
     /**
      * Returns relevant questions according to the tag object
      * @param $tags - Tags object returned from get_tags()
@@ -64,7 +65,6 @@ class Question extends Model {
 
         return $questions;
     }
-
 
     /**
      * Returns relevant questions sorted by vote according to the tag object
@@ -146,6 +146,7 @@ class Question extends Model {
         $question = trim($question, '-');
 
         // If we want to add stop words in the future, this is where we do it.
+        //  todo add more stop words
         $stopwords = explode( ',',"a,an,and,are,is,the,of,for,in,what,whats,or,to,how,do,you,they,its,if,can,test,does,on,that,was");
 
         $new_slug_parts = array_diff( explode( '-', $question ), $stopwords );
