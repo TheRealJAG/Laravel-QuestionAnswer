@@ -1,5 +1,5 @@
 ## About
-A vote based Question & Answer site built using Laravel 5.4 and a few other goodies. 
+A vote based Question & Answer site built using Laravel 5.4, material design and a few other goodies! 
 
 ## Stuff I Use
 * Twitter Bootstrap: http://getbootstrap.com
@@ -9,10 +9,11 @@ A vote based Question & Answer site built using Laravel 5.4 and a few other good
 ## Features
 * User registration
 * User profile pages
+* User participation pages
 * Upvote / Downvote questions 
 * Upvote / Downvote answers
-* Rank Questions by votes
-* Rank Answers by votes
+* Rank questions by votes
+* Rank answers by votes
 * Assign tag to question
 * Assign level to question
 * Display top ranked questions
