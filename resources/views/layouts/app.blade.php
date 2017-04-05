@@ -11,13 +11,10 @@
     <title>{{ isset($page_title) ? $page_title : config('app.name', 'Laravel') }}</title>
 
     <!-- The following can be cleaned up. Don't always need to include certain files. -->
-    <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/tags.css') }}" rel="stylesheet">
     <link href="{{ asset('css/mdb.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-
-    <!-- Custom CSS -->
     <link href="{{ asset('css/editable.css') }}" rel="stylesheet"/>
 
     <!-- Scripts -->
@@ -47,15 +44,15 @@
     <script src="{{asset('/plugins/jquery-upvote/jquery.upvote.js')}}"></script>
     <link href="{{ asset('plugins/jquery-upvote/jquery.upvote.css') }}" rel="stylesheet"/>
 
-    <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
-
+    <!-- Materialize Bootstrap JS -->
     <script src="{{ asset('js/mdb.min.js') }}"></script>
 
+    <!-- Best way to load -->
+    <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
 </head>
 <body>
     <div id="app">
         <div class="container">
-
             <!--Navbar-->
             <nav class="navbar navbar-default fixed-top navbar-light #42a5f5 blue">
                 <div class="container-fluid">
@@ -69,7 +66,6 @@
                         </button>
                         <a class="navbar-brand" href="{{ url('/') }}"><i class="fa fa-home" fa-lg></i></a>
                     </div>
-
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
@@ -91,7 +87,6 @@
                                 </ul>
                             </li>
                         </ul>
-
                         <ul class="nav navbar-nav navbar-right">
                             @if (Auth::guest())
                                 <li><a href="{{ route('login') }}">Login</a></li>
@@ -104,14 +99,12 @@
                                         <li><a href="/user/{{ Auth::user()->id }}/answers">My Answers</a></li>
                                         <li class="divider"></li>
                                         <li><a href="/user/{{ Auth::user()->id }}">Profile</a></li>
-
                                         <li>
                                             <a href="{{ route('logout') }}"
                                                onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                                 Logout
                                             </a>
-
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                                 {{ csrf_field() }}
                                             </form>
@@ -124,13 +117,10 @@
                 </div><!-- /.container-fluid -->
             </nav>
             <!--/.Navbar-->
-
         </div>
         @yield('content')
         <P><center><a href="https://github.com/TheRealJAG/Laravel-QnA">Powered by Laravel</a></center></P>
     </div>
-
     @include('modals.login')
-
 </body>
 </html>
