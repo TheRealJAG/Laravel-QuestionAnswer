@@ -10,17 +10,24 @@ A vote based Question & Answer site built using Laravel 5.4, material design and
 * x-editable: https://github.com/vitalets/x-editable
 
 ## Features
+
+##### User
 * User registration
-* User profile pages
-* User participation pages
-* Upvote / Downvote questions 
-* Upvote / Downvote answers
-* Inline edit answers 
-* Rank questions by votes
-* Rank answers by votes
-* Assign tag to question
-* Assign level to question
-* Display top ranked questions
+* User profile
+* User participation
+
+##### Question
+* Assign tag(s)
+* Upvote / Downvote
+* Level
+
+##### Answer
+* Upvote / Downvote
+* Inline edit 
+* Rank by votes
+
+##### Pages
+* Display top questions
 * Display new questions
 
 ## License
