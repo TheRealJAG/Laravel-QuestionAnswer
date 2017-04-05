@@ -9,8 +9,10 @@ A vote based Question & Answer site built using Laravel 5.4 and a few other good
 ## Features
 * User registration
 * User Pages
-* Top Ranked questions page
-* New Ranked questions page
+* Assign tag to question
+* Assign level to question
+* Display top ranked questions
+* Display new questions
 * Upvote / Downvote Questions 
 * Upvote / Downvote Answers
 * Rank Questions by votes
