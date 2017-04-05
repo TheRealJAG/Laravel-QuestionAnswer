@@ -5,6 +5,8 @@ A vote based Question & Answer site built using Laravel 5.4, material design and
 * Twitter Bootstrap: http://getbootstrap.com
 * jQuery Upvote: https://github.com/janosgyerik/jquery-upvote
 * Material Design for Bootstrap: https://mdbootstrap.com/material-design-for-bootstrap/
+* bootstrap-tagsinput: https://github.com/bootstrap-tagsinput/bootstrap-tagsinput
+* x-editable: https://github.com/vitalets/x-editable
 
 ## Features
 * User registration
