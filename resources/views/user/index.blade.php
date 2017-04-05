@@ -39,7 +39,7 @@
                         </div>
 
                         @if ( $questions->isEmpty() )
-                            <p> This user has not asked any questions yet.</p>
+                            <p> This user has not asked any questions.</p>
                         @else
 
                             <div id="questions">
@@ -55,7 +55,7 @@
                         @endif
 
                         @if ( $answers->isEmpty() )
-                            <p> This user has not asked any questions yet.</p>
+                            <p> This user has not asked any answers.</p>
                         @else
 
                             <div id="answers">
