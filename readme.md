@@ -1,7 +1,8 @@
 ## About
 A vote based Question & Answer site built using Laravel 5.4, material design and a few other goodies! 
 
-## Stuff I Use
+## Tech
+* Laravel: https://github.com/laravel/laravel
 * Twitter Bootstrap: http://getbootstrap.com
 * jQuery Upvote: https://github.com/janosgyerik/jquery-upvote
 * Material Design for Bootstrap: https://mdbootstrap.com/material-design-for-bootstrap/
@@ -14,6 +15,7 @@ A vote based Question & Answer site built using Laravel 5.4, material design and
 * User participation pages
 * Upvote / Downvote questions 
 * Upvote / Downvote answers
+* Inline edit answers 
 * Rank questions by votes
 * Rank answers by votes
 * Assign tag to question
