@@ -11,22 +11,22 @@ use App\Question;
 class TagController extends Controller
 {
     /**
-     * Show the tag
+     * Show new tag questions
      *
      * @param  int  $tag_name
      * @return Response
      */
-    public function show($tag_name)
+    public function show_new($tag_name)
     {
         $tag = Tag::where('name', '=', $tag_name)->get();
         $questions = Question::recent_relevant($tag);
         $tag = $tag[0];
         $tags = Tag::distinct()->orderBy('name', 'asc')->get();
-        return view('tag')->with('tag_info',$tag)->with('questions',$questions)->with('page_title', 'New ' . $tag->name . ' Interview Questions')->with('sort','new')->with('tags',$tags);
+        return view('tag', ['tag_info' => $tag, 'questions' => $questions, 'page_title' => 'New ' . $tag->name . ' Interview Questions', 'sort' => 'new', 'tags' => $tags]);
     }
 
     /**
-     * Show the question
+     * Show show top tag questions
      *
      * @param  int  $tag_name
      * @return Response
@@ -37,6 +37,6 @@ class TagController extends Controller
         $questions = Question::top_relevant($tag);
         $tag = $tag[0];
         $tags = Tag::distinct()->orderBy('name', 'asc')->get();
-        return view('tag')->with('tag_info',$tag)->with('questions',$questions)->with('page_title', 'Top ' . $tag->name . ' Interview Questions')->with('sort','top')->with('tags',$tags);
+        return view('tag', ['tag_info' => $tag, 'questions' => $questions, 'page_title' => 'Top ' . $tag->name . ' Interview Questions', 'sort' => 'top', 'tags' => $tags]);
     }
 }

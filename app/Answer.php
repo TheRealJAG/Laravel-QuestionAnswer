@@ -29,6 +29,12 @@ class Answer extends Model
         return $answer;
     }
 
+    // format text
+
+    public static function format_text() {
+        echo '';
+    }
+
     /**
      * Update an answer
      */

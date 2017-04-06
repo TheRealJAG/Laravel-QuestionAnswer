@@ -56,14 +56,15 @@
 
 .bootstrap-tagsinput .label {
     background-color: #0097cf;
-    display: inline;
-    padding: .2em .6em .3em;
+    display:inline-block;
     font-size: 110%;
     font-weight: 700;
     line-height: 1;
     color: #fff;
     text-align: center;
     white-space: nowrap;
-    vertical-align: baseline;
+    vertical-align: middle;
     border-radius: .25em;
+    margin: 20px 10px 0px 0px;
+    padding: .2em .6em .3em;
 }

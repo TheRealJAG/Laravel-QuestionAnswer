@@ -1,7 +1,7 @@
 $(document).ready(function(){
     var elt = $('#txtTags');
 
-    var skills = new Bloodhound({
+    var tags = new Bloodhound({
         datumTokenizer: Bloodhound.tokenizers.obj.whitespace('id'),
         queryTokenizer: Bloodhound.tokenizers.whitespace,
         remote: {
@@ -9,7 +9,7 @@ $(document).ready(function(){
             wildcard: '%QUERY%',
         }
     });
-    skills.initialize();
+    tags.initialize();
 
     $('#txtTags').tagsinput({
         itemValue : 'id',
@@ -19,7 +19,6 @@ $(document).ready(function(){
         trimValue: true,
         allowDuplicates : false,
         freeInput: false,
-        focusClass: 'form-control',
         tagClass: function(item) {
             if(item.display)
                 return 'label label-' + item.display;
@@ -38,7 +37,7 @@ $(document).ready(function(){
                 name: 'tags',
                 itemValue: 'id',
                 displayKey: 'name',
-                source: skills.ttAdapter(),
+                source: tags.ttAdapter(),
                 templates: {
                     empty: [
                         '<ul class="list-group"><li class="list-group-item">Nothing found.</li></ul>'

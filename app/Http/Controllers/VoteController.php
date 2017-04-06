@@ -17,9 +17,7 @@ class VoteController extends Controller
 
         // Is the current and past vote the same?
         // If so, remove all votes. They want to nullify vote..
-        $voted = Vote::where('user_id', Auth::id())
-            ->where('question_id',Request::get('question_id'))
-            ->first();
+        $voted = Vote::where('user_id', Auth::id())->where('question_id',Request::get('question_id'))->first();
 
         if (isset($voted->id)) {
             Vote::destroy($voted->id);

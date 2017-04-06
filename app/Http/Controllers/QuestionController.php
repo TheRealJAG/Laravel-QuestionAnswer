@@ -26,13 +26,7 @@ class QuestionController extends Controller
         $answers = Answer::get_sorted($question_id);
         $answer_ids = Answer::get_answer_ids($question_id);
         $tags = Tag::distinct()->orderBy('name', 'asc')->get();
-        return view('question')
-            ->with('answer_ids',$answer_ids)
-            ->with('recent_questions',$recent_questions)
-            ->with('answers',$answers)
-            ->with('question',$question)
-            ->with('page_title',$question->question)
-            ->with('tags', $tags);
+        return view('question', ['answer_ids' => $answer_ids, 'recent_questions' => $recent_questions, 'answers' => $answers, 'question' => $question, 'page_title' => $question->question, 'tags' => $tags]);
     }
 
     /**
@@ -55,10 +49,7 @@ class QuestionController extends Controller
     {
         $questions = Question::top();
         $tags = Tag::distinct()->orderBy('name', 'asc')->get();
-        return view('questions.top')
-            ->with('questions',$questions)
-            ->with('page_title','Top Questions')
-            ->with('sort','top')->with('tags',$tags);
+        return view('questions.top', ['questions' => $questions, 'page_title' => 'Top Questions', 'sort' =>'top', 'tags' =>$tags]);
     }
 
     /**
@@ -70,10 +61,6 @@ class QuestionController extends Controller
     {
         $questions = Question::orderBy('created_at', 'desc')->paginate(10);
         $tags = Tag::distinct()->orderBy('name', 'asc')->get();
-        return view('questions.new')
-            ->with('questions',$questions)
-            ->with('page_title','Top Questions')
-            ->with('sort','new')
-            ->with('tags',$tags);
+        return view('questions.new', ['questions' => $questions, 'page_title' => 'New Questions', 'sort' =>'new', 'tags' =>$tags]);
     }
 }

@@ -32,6 +32,10 @@ Demo: http://qna.therealjag.com
 * Display top questions
 * Display new questions
 
+## Todo
+* Time between questions - build a anti-spam engine
+* Send email to user when question is answered
+
 ## License
 This software is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
 
