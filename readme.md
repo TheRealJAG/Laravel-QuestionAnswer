@@ -1,5 +1,5 @@
 ## About
-A vote based Question & Answer site built using Laravel 5.4, material design and a few other goodies! 
+Vote based Question & Answer site built using Laravel 5.4, material design, x-editable and jQuery Upvote.
 
 Demo: http://qna.therealjag.com
 
