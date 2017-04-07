@@ -21,6 +21,10 @@ class QuestionController extends Controller
     public function show($question_id)
     {
         $question = Question::find($question_id);
+
+        if (!$question)
+            abort(404, "Page Not Found");
+
         $question_tags = Question::get_tags($question_id);
         $recent_questions = Question::top_relevant($question_tags,$question_id);
         $answers = Answer::get_sorted($question_id);

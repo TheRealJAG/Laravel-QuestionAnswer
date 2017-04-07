@@ -18,6 +18,10 @@ class UserController extends Controller
     public function index($id)
     {
         $user = User::findOrFail($id);
+
+        if (!$user)
+            abort(404, "Page Not Found");
+
         $questions = Question::where('user_id', '=', $id)->take(10)->orderBy('id','DESC')->get();
         $answers = Answer::where('user_id', '=', $id)->take(10)->orderBy('id','DESC')->get();
         return view('user.index')->with('questions',$questions)->with('user',$user)->with('answers',$answers)->with('page_title', $user->name . '');

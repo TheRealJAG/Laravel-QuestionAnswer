@@ -29,7 +29,7 @@ Route::get('questions/top', 'QuestionController@top');
 Route::get('questions/new', 'QuestionController@newest');
 Route::get('question/{id}/{question}', 'QuestionController@show');
 Route::post('question', array( 'before'=>'csfr','uses'=>'QuestionController@insert' ) );
-Route::get('/question/ask', function () {
+Route::get('question/ask', function () {
     return view('questions.ask', ['tags' => App\Tag::get()]);
 });
 

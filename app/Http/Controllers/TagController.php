@@ -19,9 +19,14 @@ class TagController extends Controller
     public function show_new($tag_name)
     {
         $tag = Tag::where('name', '=', $tag_name)->get();
+
+            if ($tag->isEmpty())
+                abort(404, "Page Not Found");
+
         $questions = Question::recent_relevant($tag);
         $tag = $tag[0];
         $tags = Tag::distinct()->orderBy('name', 'asc')->get();
+
         return view('tag', ['tag_info' => $tag, 'questions' => $questions, 'page_title' => 'New ' . $tag->name . ' Interview Questions', 'sort' => 'new', 'tags' => $tags]);
     }
 
