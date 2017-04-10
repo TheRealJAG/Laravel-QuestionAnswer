@@ -10,7 +10,7 @@
                     <div class="panel-body">
 
                         @if ( $questions->isEmpty() )
-                            <p> There are no questions.</p>
+                            <p>No New Questions</p>
                         @else
 
                             <div id="questions">

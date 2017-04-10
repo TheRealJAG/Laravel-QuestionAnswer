@@ -4,9 +4,9 @@
             {{ Form::open(['url' => 'vote', 'class' => 'vote']) }}
             {{ Form::token() }}
             <div class="upvote vote_answer" data-answer="{{$answer->id}}" data-uid="{{Auth::id()}}">
-                <a class="upvote vote {{ $answer->user_id == Auth::id() ? 'vote_disabled' : '' }} {{ $answer->votes && $answer->votes->contains('user_id', Auth::id()) ? ($answer->votes->where('user_id', Auth::id())->first()->vote == 1 ? 'upvote-on' : null) : null}}" data-vote="1"></a>
-                <span class="count">{{ $answer->votes->sum('vote') }}</span>
-                <a class="downvote vote {{ $answer->user_id == Auth::id() ? 'vote_disabled' : '' }} {{ $answer->votes && $answer->votes->contains('user_id', Auth::id()) ? ($answer->votes->where('user_id', Auth::id())->first()->vote <= 0 ? 'downvote-on' : null) : null}}" data-vote="-1"></a>
+                <a id="a-upvote"  class="upvote vote {{ $answer->user_id == Auth::id() ? 'vote_disabled' : '' }} {{ $answer->votes && $answer->votes->contains('user_id', Auth::id()) ? ($answer->votes->where('user_id', Auth::id())->first()->vote == 1 ? 'upvote-on' : null) : null}}" data-vote="1"></a>
+                <span class="count" id="a-{{$answer->id}}">{{ $answer->votes->sum('vote') }}</span>
+                <a id="a-downvote" class="downvote vote {{ $answer->user_id == Auth::id() ? 'vote_disabled' : '' }} {{ $answer->votes && $answer->votes->contains('user_id', Auth::id()) ? ($answer->votes->where('user_id', Auth::id())->first()->vote <= 0 ? 'downvote-on' : null) : null}}" data-vote="-1"></a>
             </div>
             {{ Form::close() }}
         </div>

@@ -68,7 +68,7 @@
                                 @endforeach
                             @endif
                                 @if ( $recent_questions->isEmpty() )
-                                    <p> This user has not asked any questions yet.</p>
+                                    <p>No Relevant Questions</p>
                                 @else
                                     <div id="questions">
                                         <legend class="text-left">Relevant Questions</legend>
