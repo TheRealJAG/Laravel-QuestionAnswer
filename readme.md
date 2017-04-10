@@ -11,6 +11,11 @@ Demo: http://qna.therealjag.com
 * bootstrap-tagsinput: https://github.com/bootstrap-tagsinput/bootstrap-tagsinput
 * x-editable: https://github.com/vitalets/x-editable
 
+## Database
+There are no database migration files for this project, you will need to use the raw sql.txt file attached in the project to create your tables.
+
+If a contributor could create migrations files for this project that would be spectacular! 
+
 ## Features
 
 ##### User
