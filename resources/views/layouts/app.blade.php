@@ -119,7 +119,21 @@
             <!--/.Navbar-->
         </div>
         @yield('content')
-        <P><center><a href="https://github.com/TheRealJAG/Laravel-QnA">Powered by Laravel</a></center></P>
+
+        <P><center>
+            <!-- Place this tag in your head or just before your close body tag. -->
+            <script async defer src="https://buttons.github.io/buttons.js"></script>
+            <!-- Place this tag where you want the button to render. -->
+            <a class="github-button" href="https://github.com/TheRealJAG/Laravel-QnA" data-icon="octicon-star" data-style="mega" data-count-href="/TheRealJAG/Laravel-QnA/stargazers" data-count-api="/repos/TheRealJAG/Laravel-QnA#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star TheRealJAG/Laravel-QnA on GitHub">Star</a>
+
+            <!-- Place this tag where you want the button to render. -->
+            <a class="github-button" href="https://github.com/TheRealJAG" data-style="mega" data-count-href="/TheRealJAG/followers" data-count-api="/users/TheRealJAG#followers" data-count-aria-label="# followers on GitHub" aria-label="Follow @TheRealJAG on GitHub">Follow @TheRealJAG</a>
+
+            <br>
+            <a href="https://github.com/TheRealJAG/Laravel-QnA">Powered by Laravel</a>
+
+        </center></P>
+
     </div>
     @include('modals.login')
 </body>
