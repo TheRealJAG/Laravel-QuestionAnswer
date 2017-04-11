@@ -140,7 +140,6 @@ return [
         /*
          * Laravel Framework Service Providers...
          */
-        Conner\Tagging\Providers\TaggingServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,

@@ -20,9 +20,10 @@
             @endif
 
             <span>
-                <a href=""><button type="button" class="btn btn-primary btn-xs disabled">{{ $question->level }}</button></a>
+                <a href="/level/{{ $question->level }}"><button type="button" class="btn btn-primary btn-xs">{{ $question->level }}</button></a>
                 <strong><small> Asked by <a href="/user/{{$question->user->id}}"  title="Click to view {{ $question->user->name }}'s profile">{{ucfirst($question->user->name)}}</a> {{date('F dS Y', strtotime($question->created_at))}} with {{ isset($question->answer_count[0]->total) ? $question->answer_count[0]->total . ' ' . str_plural('answer', $question->answer_count[0]->answer_count) : '0 answers'  }} </strong></small><br><br>
             </span>
         </div>
     </div>
 <!-- END Question Container-->
+<hr style="margin: 10px 0 10px">

@@ -110,6 +110,22 @@ class Question extends Model {
     }
 
     /**
+     * Returns relevant questions sorted by vote according to the tag object
+     * @param $tags - Tags object returned from get_tags()
+     * @return mixed
+     */
+    public static function level($level) {
+        $questions = Question::join('votes', 'questions.id', '=', 'votes.question_id')
+            ->select('questions.*', DB::raw('sum(votes.vote) as vote_ttl'))
+            ->groupBy('questions.id')
+            ->where('level', '=', $level)
+            ->orderBy('vote_ttl', 'desc')
+            ->orderBy('questions.created_at', 'desc')
+            ->paginate(10);
+        return $questions;
+    }
+
+    /**
      * Returns tags for the question
      * @param $id
      * @return mixed

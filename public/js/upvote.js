@@ -76,8 +76,6 @@ $(document).ready(function() {
                 var action = $(this).attr('id'); // upvote or downvote
                 var new_vote_value = parseInt($( "#a-" +  $(this).parent().data('answer')).text()); // score attempted, we either knock it back down or up.
 
-                console.log(new_vote_value);
-
                 if (action == 'a-upvote') {
                     var str = new_vote_value - 1;
                     $( "#a-" +  $(this).parent().data('answer')).html(str);

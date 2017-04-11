@@ -79,7 +79,7 @@
                                 <a class="nav-link" href="/question/ask">ASK </a></a>
                             </li>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Level <span class="caret"></span></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">LEVEL <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="/level/beginner">Beginner</a></li>
                                     <li><a href="/level/intermediate">Intermediate</a></li>
