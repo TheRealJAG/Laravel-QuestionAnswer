@@ -59,4 +59,18 @@ class TagController extends Controller
         return view('tag', ['tag_info' => $tag, 'questions' => $questions, 'page_title' => 'Most Answered ' . $tag->name . ' Questions', 'sort' => 'top_answered', 'tags' => $tags]);
     }
 
+    /**
+     * Get the top questions according to votes
+     * GET /questions/top
+     * @return Redirect
+     */
+    public function show_unanswered($tag_name)
+    {
+        $tag = Tag::where('name', '=', $tag_name)->get();
+        $questions = Tag::unanswered($tag);
+        $tag = $tag[0];
+        $tags = Tag::distinct()->orderBy('name', 'asc')->get();
+        return view('tag', ['tag_info' => $tag, 'questions' => $questions, 'page_title' => 'Most Answered ' . $tag->name . ' Questions', 'sort' => 'not_answered', 'tags' => $tags]);
+    }
+
 }

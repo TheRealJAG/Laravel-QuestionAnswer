@@ -32,7 +32,7 @@
                                 </div>
                                 <ul style="list-style-type: none; padding-left:0px;">
                                     @foreach( $questions as $question )
-                                        <li> @include('containers.question') </li>
+                                        <li> @include('containers.question') <hr></li>
                                     @endforeach
                                     <li><a href="/user/{{ $user->id }}/questions">Show All</a></li>
                                 </ul>

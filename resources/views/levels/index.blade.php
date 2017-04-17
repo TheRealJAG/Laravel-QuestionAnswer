@@ -18,6 +18,7 @@
                             @else
                                 @foreach( $questions as $question )
                                     @include('containers.question')
+                                    <hr>
                                 @endforeach
                             @endif
 
