@@ -32,6 +32,7 @@
                         <div class="panel panel-default">
                             <div class="panel-body">
                             @include('containers.question')
+                                <br/>
                             <!-- Show the answer form -->
                                 @if ((isset(Auth::user()->id) && Auth::user()->id != $question->user_id) && in_array(Auth::user()->id,$answer_ids) == FALSE)
                                     <id id="post-answer">
@@ -78,6 +79,7 @@
                                     </div>
                                     @foreach( $recent_questions as $question )
                                         @include('containers.question')
+                                        <hr>
                                     @endforeach
                                 @endif
                             </div>

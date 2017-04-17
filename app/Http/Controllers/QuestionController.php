@@ -30,7 +30,7 @@ class QuestionController extends Controller
         $answers = Answer::get_sorted($question_id);
         $answer_ids = Answer::get_answer_ids($question_id);
         $tags = Tag::distinct()->orderBy('name', 'asc')->get();
-        return view('question', ['answer_ids' => $answer_ids, 'recent_questions' => $relevant_questions, 'answers' => $answers, 'question' => $question, 'page_title' => $question->question, 'tags' => $tags]);
+        return view('question', ['answer_ids' => $answer_ids, 'recent_questions' => $relevant_questions, 'answers' => $answers, 'question' => $question, 'page_title' => $question->question, 'tags' => $tags, 'is_question' => true]);
     }
 
     /**
