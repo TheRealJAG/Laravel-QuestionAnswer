@@ -12,16 +12,14 @@
         </div>
         <div class="col-xs-10 col-md-11">
             <h3 style="color: #2a88bd;font-weight: bolder;margin-top: 0"><a href="/question/{{$question->id}}/{{ \App\Question::get_url($question->question) }}" title="{{ e($question->question) }}">{{ e($question->question) }}</a></h3>
-
-            @if ( !$question->tags->isEmpty() )
-                @foreach( $question->tags as $tag )
-                    <a href="/tag/{{ strtolower($tag->name) }}" title="{{ $tag->name }} Interview Questions"><button type="button" class="btn btn-primary btn-xs"><i class="fa fa-hashtag" style="color: white;"></i> {{ $tag->name }}</button></a>
-                @endforeach
-            @endif
-
+                @if ( !$question->tags->isEmpty() )
+                    @foreach( $question->tags as $tag )
+                        <a href="/tag/{{ strtolower($tag->name) }}" title="{{ $tag->name }}"><button type="button" class="btn btn-primary btn-xs"><i class="fa fa-hashtag" style="color: white;"></i> {{ $tag->name }}</button></a>
+                    @endforeach
+                @endif
             <span>
-                <a href="/level/{{ $question->level }}"><button type="button" class="btn btn-primary btn-xs">{{ $question->level }}</button></a>
-                <strong><small> Asked by <a href="/user/{{$question->user->id}}"  title="Click to view {{ $question->user->name }}'s profile">{{ucfirst($question->user->name)}}</a> {{date('F dS Y', strtotime($question->created_at))}} with {{ isset($question->answer_count[0]->total) ? $question->answer_count[0]->total . ' ' . str_plural('answer', $question->answer_count[0]->answer_count) : '0 answers'  }} </strong></small><br><br>
+                <a href="/level/{{ strtolower($question->level) }}" title="{{ $question->level }}"><button type="button" class="btn btn-primary btn-xs">{{ $question->level }}</button></a>
+                <small><strong> Submitted {{date('F dS Y', strtotime($question->created_at))}} by <a href="/user/{{$question->user->id}}"  title="{{ $question->user->name }}">{{ucfirst($question->user->name)}}</a>  {{ isset($question->answer_count[0]->total) ? $question->answer_count[0]->total . ' ' . str_plural('answer', $question->answer_count[0]->answer_count) : ''  }} </strong></small><br><br>
             </span>
         </div>
     </div>

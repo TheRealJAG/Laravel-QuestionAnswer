@@ -27,7 +27,7 @@ class TagController extends Controller
         $tag = $tag[0];
         $tags = Tag::distinct()->orderBy('name', 'asc')->get();
 
-        return view('tag', ['tag_info' => $tag, 'questions' => $questions, 'page_title' => 'New ' . $tag->name . ' Interview Questions', 'sort' => 'new', 'tags' => $tags]);
+        return view('tag', ['tag_info' => $tag, 'questions' => $questions, 'page_title' => 'New ' . $tag->name . ' Questions', 'sort' => 'new', 'tags' => $tags]);
     }
 
     /**
@@ -42,6 +42,6 @@ class TagController extends Controller
         $questions = Question::top_relevant($tag);
         $tag = $tag[0];
         $tags = Tag::distinct()->orderBy('name', 'asc')->get();
-        return view('tag', ['tag_info' => $tag, 'questions' => $questions, 'page_title' => 'Top ' . $tag->name . ' Interview Questions', 'sort' => 'top', 'tags' => $tags]);
+        return view('tag', ['tag_info' => $tag, 'questions' => $questions, 'page_title' => 'Top ' . $tag->name . ' Questions', 'sort' => 'top', 'tags' => $tags]);
     }
 }
