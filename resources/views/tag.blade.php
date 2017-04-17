@@ -2,7 +2,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-3 hidden-xs  hidden-sm">
                 @include('containers.tags')
             </div>
             <div class="col-md-9">
@@ -15,7 +15,7 @@
 
                             <div id="questions">
                                 <legend class="text-left">
-                                    <h1>{{ucfirst($sort)}} {{$tag_info->name}} Interview Questions</h1>
+                                    <h1>{{ucfirst($sort)}} {{$tag_info->name}} Questions</h1>
                                 </legend>
                             </div>
 

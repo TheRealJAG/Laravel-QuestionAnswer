@@ -15,7 +15,7 @@
 
                             <div id="questions">
                                 <legend class="text-left">
-                                    <h1>Top Interview Questions</h1>
+                                    <h1>Top Questions</h1>
                                 </legend>
                             </div>
 

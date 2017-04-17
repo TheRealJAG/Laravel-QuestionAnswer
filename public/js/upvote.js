@@ -1,11 +1,10 @@
 /*
 
-The main JS that powers the answer upvote functionality.
-todo Make questions votable
+Handle voting of questions and answers
+
 */
 
 $(document).ready(function() {
-
     // Question Voting
     $('.vote_question').upvote();
     $('.vote_q').on('click', function (e) {
@@ -13,37 +12,25 @@ $(document).ready(function() {
         var uid = $(this).parent().data('uid');
         var question_id = $(this).parent().data('question');
 
-        // Are we voting on an question?
         if ($(this).parent().data('question')) {
-
-            // If visitor is guest
-            // Throw a modal and correct the vote value
-            if (uid == '') {
-                var action = $(this).attr('id'); // upvote or downvote
-                var new_vote_value = parseInt($( "#q-" +  $(this).parent().data('question')).text()); // score attempted, we either knock it back down or up.
-
-                    if (action == 'q-upvote') {
-                        var str = new_vote_value - 1;
-                        $( "#q-" +  $(this).parent().data('question')).html(str);
-                    } else if (action == 'q-downvote') {
-                        var str = new_vote_value + 1;
-                        $( "#q-" +  $(this).parent().data('question')).html(str);
+            if (uid == '') { // visitor is guest, throw a modal and correct the vote value, reset arrow
+                var action = $(this).attr('id'); // upvote or downvote action
+                var new_vote_value = parseInt($( "#q-" +  $(this).parent().data('question')).text()); // get score attempted
+                    if (action == 'q-upvote') { // if upvoted, downvote
+                        $( "#q-" +  $(this).parent().data('question')).html(new_vote_value - 1); // assign new value
+                    } else if (action == 'q-downvote') { // if downvoted, upvote
+                        $( "#q-" +  $(this).parent().data('question')).html(new_vote_value + 1); // assign new value
                     }
-
-                $('a.upvote').removeClass('upvote-on');
-                $('a.downvote').removeClass('downvote-on');
-                $('#LoginModal').modal('show');
+                $('a.upvote').removeClass('upvote-on'); // remove upvote highlight
+                $('a.downvote').removeClass('downvote-on'); // remove downvote highlight
+                $('#LoginModal').modal('show'); // show modal
                 return false;
             }
 
-            // Laravel token
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('[name="_token"]').val()
-                }
-            });
+            // X-CSRF-TOKEN
+            $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('[name="_token"]').val()}});
 
-            // Cast the vote to php via jquery
+            // Cast vote to PHP
             $.ajax({
                 type: "POST",
                 url: '/vote/question',
@@ -74,28 +61,22 @@ $(document).ready(function() {
             // Throw a modal and correct the vote value
             if (uid == '') {
                 var action = $(this).attr('id'); // upvote or downvote
-                var new_vote_value = parseInt($( "#a-" +  $(this).parent().data('answer')).text()); // score attempted, we either knock it back down or up.
+                var new_vote_value = parseInt($( "#a-" +  $(this).parent().data('answer')).text()); // get score attempted
 
-                if (action == 'a-upvote') {
-                    var str = new_vote_value - 1;
-                    $( "#a-" +  $(this).parent().data('answer')).html(str);
-                } else if (action == 'a-downvote') {
-                    var str = new_vote_value + 1;
-                    $( "#a-" +  $(this).parent().data('answer')).html(str);
+                if (action == 'a-upvote') { // if upvoted, downvote
+                    $( "#a-" +  $(this).parent().data('answer')).html(new_vote_value - 1);
+                } else if (action == 'a-downvote') { // if downvoted, upvote
+                    $( "#a-" +  $(this).parent().data('answer')).html(new_vote_value + 1);
                 }
 
-                $('a.upvote').removeClass('upvote-on');
-                $('a.downvote').removeClass('downvote-on');
-                $('#LoginModal').modal('show');
+                $('a.upvote').removeClass('upvote-on'); // remove upvote highlight
+                $('a.downvote').removeClass('downvote-on'); // remove downvote highlight
+                $('#LoginModal').modal('show'); // show modal
                 return false;
             }
 
-            // Laravel token
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('[name="_token"]').val()
-                }
-            });
+            // X-CSRF-TOKEN
+            $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('[name="_token"]').val()}});
 
             // Cast the vote to php via jquesy
             $.ajax({
@@ -114,5 +95,4 @@ $(document).ready(function() {
         }
     });
     // End Answer Voting
-
 });

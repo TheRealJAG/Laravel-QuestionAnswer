@@ -1,8 +1,8 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-        <div class="row">
-            <div class="hidden-xs hidden-sm col-md-3">
+        <div class="hidden-xs hidden-sm col-md-3">
+            @if (Auth::id())
                 <div class="panel panel-default">
                     <div class="panel-body">
                         @if (Auth::id())
@@ -20,53 +20,56 @@
                                 <a href="/questions/new" title="New Questions"><i class="fa fa-lightbulb-o" style="color: #4285F4;"></i> <strong>New Questions</strong></a>
                             </li>
                         </ul>
+
                     </div>
                 </div>
-                @include('containers.tags')
-            </div>
-            <div class="col-md-9">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        @include('containers.question')
-                        <!-- Show the answer form -->
-                        @if ((isset(Auth::user()->id) && Auth::user()->id != $question->user_id) && in_array(Auth::user()->id,$answer_ids) == FALSE)
-                            <id id="post-answer">
-                                @if( isset(Auth::user()->id) && !Auth::check())
-                                    <p>Please <a href="/login">login</a> to post an answer for this question</p>
-                                @else
-                                    {{ Form::open( array('url'=>'answer','class' =>'form-horizontal') ) }}
-                                    {{ Form::token() }}
-                                    {{ Form::hidden('question_id',$question->id) }}
-                                    {{ Form::hidden('question_url', App\Question::get_url($question->question)) }}
+            @endif
+            @include('containers.tags')
+        </div>
+        <div class="col-md-9">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                            @include('containers.question')
+                            <!-- Show the answer form -->
+                                @if ((isset(Auth::user()->id) && Auth::user()->id != $question->user_id) && in_array(Auth::user()->id,$answer_ids) == FALSE)
+                                    <id id="post-answer">
+                                        @if( isset(Auth::user()->id) && !Auth::check())
+                                            <p>Please <a href="/login">login</a> to post an answer for this question</p>
+                                        @else
+                                            {{ Form::open( array('url'=>'answer','class' =>'form-horizontal') ) }}
+                                            {{ Form::token() }}
+                                            {{ Form::hidden('question_id',$question->id) }}
+                                            {{ Form::hidden('question_url', App\Question::get_url($question->question)) }}
 
-                                    <div class="form-group">
-                                        <div class="col-md-10">
-                                            {!! Form::text('answer', null, [
-                                                'class'                         => 'form-control',
-                                                'placeholder'                   => 'Enter an answer here...',
-                                                'required'
-                                            ]) !!}
-                                        </div>
-                                        <div class="col-md-2">
-                                            {{ Form::submit('Submit',['class' => 'btn btn-primary']) }}
-                                        </div>
-                                    </div>
+                                            <div class="form-group">
+                                                <div class="col-md-10">
+                                                    {!! Form::text('answer', null, [
+                                                        'class'                         => 'form-control',
+                                                        'placeholder'                   => 'Enter an answer here...',
+                                                        'required'
+                                                    ]) !!}
+                                                </div>
+                                                <div class="col-md-2">
+                                                    {{ Form::submit('Submit',['class' => 'btn btn-primary']) }}
+                                                </div>
+                                            </div>
 
-                                    {{ Form::close() }}
+                                            {{ Form::close() }}
+                                        @endif
+                                    </id>
                                 @endif
-                            </id>
-                        @endif
-                    <!-- END Show the answer form -->
-                        <div id="answers">
-                            <legend class="text-left">Answers</legend>
-                        </div>
-                            @if ( $answers->isEmpty() )
-                                <p>No answer has been submitted for this question. Be the first!</p>
-                            @else
-                                @foreach( $answers as $answer )
-                                    @include('containers.answer')
-                                @endforeach
-                            @endif
+                            <!-- END Show the answer form -->
+                                @if ( !$answers->isEmpty() )
+                                    <div id="answers">
+                                        <legend class="text-left">Answers</legend>
+                                    </div>
+                                    @foreach( $answers as $answer )
+                                        @include('containers.answer')
+                                    @endforeach
+                                @endif
+                                <br>
                                 @if ( $recent_questions->isEmpty() )
                                     <p>No Relevant Questions</p>
                                 @else
@@ -76,10 +79,11 @@
                                     @foreach( $recent_questions as $question )
                                         @include('containers.question')
                                     @endforeach
-                            @endif
+                                @endif
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
         </div>
     </div>
 @endsection

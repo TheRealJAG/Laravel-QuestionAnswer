@@ -15,15 +15,15 @@
 
             @if (isset(Auth::user()->id) && $answer->user->id == Auth::user()->id)
                 <div id="_token" class="hidden" data-token="{{ csrf_token() }}"></div>
-                <div data-type="textarea" data-pk="{{ $answer->id }}" class="answer editable editable-click editable-open editable-custom"  data-title="CLICK TEXT TO EDIT"><h4 style="margin: 0;display: inline;">{{ e($answer->answer) }}</h4></div>
+                <div data-type="textarea" data-pk="{{ $answer->id }}" class="answer editable editable-click editable-open editable-custom"  data-title="EDIT"><h4 style="margin: 0;display: inline;">{{ e($answer->answer) }}</h4></div>
             @else
                 <h4 style="margin: 0;display: inline;word-wrap:break-word;">{{ $answer->answer }}</h4>
             @endif
 
             @if ($answer->created_at != $answer->updated_at)
-                <P class="text-right" style="margin-top: 10px"><strong><small>Posted by <a href="/user/{{$answer->user->id}}" title="Click to view {{ $answer->user->name }}'s profile">{{ ucfirst($answer->user->name) }}</a>, modified {{ e($answer->updated_at->diffForHumans()) }}</small></strong></P>
+                <P class="text-right" style="margin-top: 10px"><strong><small><a href="/user/{{$answer->user->id}}" title="{{ $answer->user->name }}">{{ ucfirst($answer->user->name) }}</a> | edited {{ e($answer->updated_at->diffForHumans()) }}</small></strong></P>
             @else
-                <P class="text-right" style="margin-top: 10px"><strong><small>Posted by <a href="/user/{{$answer->user->id}}" title="Click to view {{ $answer->user->name }}'s profile">{{ ucfirst($answer->user->name) }}</a>, submitted {{ e($answer->created_at->diffForHumans()) }}</small></strong></P>
+                <P class="text-right" style="margin-top: 10px"><strong><small><a href="/user/{{$answer->user->id}}" title="{{ $answer->user->name }}">{{ ucfirst($answer->user->name) }}</a> | {{ e($answer->created_at->diffForHumans()) }}</small></strong></P>
             @endif
 
         </div>

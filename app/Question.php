@@ -86,6 +86,7 @@ class Question extends Model {
             ->join('tags', 'tags.id', '=', 'tags_questions.tag_id')
             ->select('questions.*', DB::raw('sum(votes.vote) as vote_ttl'))
             ->whereIn('tags.name', $tag_array)
+            ->where('questions.id', '!=', $question_id)
             ->groupBy('questions.id')
             ->orderBy('vote_ttl', 'desc')
             ->orderBy('questions.created_at', 'desc')

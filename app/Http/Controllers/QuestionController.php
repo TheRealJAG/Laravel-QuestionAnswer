@@ -26,11 +26,11 @@ class QuestionController extends Controller
             abort(404, "Page Not Found");
 
         $question_tags = Question::get_tags($question_id);
-        $recent_questions = Question::top_relevant($question_tags,$question_id);
+        $relevant_questions = Question::top_relevant($question_tags,$question_id);
         $answers = Answer::get_sorted($question_id);
         $answer_ids = Answer::get_answer_ids($question_id);
         $tags = Tag::distinct()->orderBy('name', 'asc')->get();
-        return view('question', ['answer_ids' => $answer_ids, 'recent_questions' => $recent_questions, 'answers' => $answers, 'question' => $question, 'page_title' => $question->question, 'tags' => $tags]);
+        return view('question', ['answer_ids' => $answer_ids, 'recent_questions' => $relevant_questions, 'answers' => $answers, 'question' => $question, 'page_title' => $question->question, 'tags' => $tags]);
     }
 
     /**
