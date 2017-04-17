@@ -22,7 +22,7 @@
                             <P>
                                 <a href="/questions/new" class="btn btn-primary btn-rounded btn-large {{$sort == 'new' ? 'disabled' : ''}}" role="button"><i class="fa fa-angle-right" style="color: white;"></i> <b>New</b></a>
                                 <a href="/questions/top" class="btn btn-primary btn-rounded btn-large {{$sort == 'top' ? 'disabled' : ''}}" role="button"><i class="fa fa-angle-right" style="color: white;"></i> <b>Top</b></a>
-                            </P>
+                            </P><br>
 
                             @foreach( $questions as $question )
                                 @include('containers.question')

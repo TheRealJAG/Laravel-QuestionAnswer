@@ -45,6 +45,7 @@
                            </div>
                            @foreach( $questions as $question )
                                @include('containers.question')
+                               <hr>
                            @endforeach
                            {{ $questions->links() }}
                        </div>
