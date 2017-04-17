@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\DB;
 
 class Question extends Model {
 
+    private static $pagination_count = 10;
+
     // Create the relationship to users
     public function user() {
         return $this->belongsTo('App\User');
@@ -106,7 +108,7 @@ class Question extends Model {
             ->groupBy('questions.id')
             ->orderBy('vote_ttl', 'desc')
             ->orderBy('questions.created_at', 'desc')
-            ->paginate(10);
+            ->paginate(self::$pagination_count);
         return $questions;
     }
 
@@ -122,7 +124,7 @@ class Question extends Model {
             ->where('level', '=', $level)
             ->orderBy('vote_ttl', 'desc')
             ->orderBy('questions.created_at', 'desc')
-            ->paginate(10);
+            ->paginate(self::$pagination_count);
         return $questions;
     }
 

@@ -40,6 +40,7 @@ Route::post('answer/update', array( 'before'=>'csfr','uses'=>'AnswerController@u
 // Tag Routes
 Route::get('tag/{id}', 'TagController@show_new');
 Route::get('tag/{id}/top', 'TagController@show_top');
+Route::get('tag/{id}/most_answered', 'TagController@show_most_answered');
 
 // Create a quick API to get data for the tags
 Route::group(['prefix'=>'api','middleware' => 'auth'], function(){

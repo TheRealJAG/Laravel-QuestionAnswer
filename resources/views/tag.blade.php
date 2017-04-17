@@ -15,13 +15,14 @@
 
                             <div id="questions">
                                 <legend class="text-left">
-                                    <h1>{{ucfirst($sort)}} {{$tag_info->name}} Questions</h1>
+                                    <h1>{{$page_title}}</h1>
                                 </legend>
                             </div>
 
                             <P>
-                                <a href="/tag/{{strtolower($tag_info->name)}}/top" class="btn btn-primary btn-rounded btn-large {{$sort == 'top' ? 'disabled' : ''}}" role="button"><i class="fa fa-angle-right" style="color: white;"></i> <b>Top</b></a>
                                 <a href="/tag/{{strtolower($tag_info->name)}}" class="btn btn-primary btn-rounded btn-large {{$sort == 'new' ? 'disabled' : ''}}" role="button"><i class="fa fa-angle-right" style="color: white;"></i> <b>New</b></a>
+                                <a href="/tag/{{strtolower($tag_info->name)}}/top" class="btn btn-primary btn-rounded btn-large {{$sort == 'top' ? 'disabled' : ''}}" role="button"><i class="fa fa-angle-right" style="color: white;"></i> <b>Top</b></a>
+                                <a href="/tag/{{strtolower($tag_info->name)}}/most_answered" class="btn btn-primary btn-rounded btn-large {{$sort == 'top_answered' ? 'disabled' : ''}}" role="button"><i class="fa fa-angle-right" style="color: white;"></i> <b>Most Answered</b></a>
                             </P>
 
                                 @foreach( $questions as $question )

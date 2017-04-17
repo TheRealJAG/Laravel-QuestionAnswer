@@ -44,4 +44,19 @@ class TagController extends Controller
         $tags = Tag::distinct()->orderBy('name', 'asc')->get();
         return view('tag', ['tag_info' => $tag, 'questions' => $questions, 'page_title' => 'Top ' . $tag->name . ' Questions', 'sort' => 'top', 'tags' => $tags]);
     }
+
+    /**
+     * Get the top questions according to votes
+     * GET /questions/top
+     * @return Redirect
+     */
+    public function show_most_answered($tag_name)
+    {
+        $tag = Tag::where('name', '=', $tag_name)->get();
+        $questions = Tag::most_answered($tag);
+        $tag = $tag[0];
+        $tags = Tag::distinct()->orderBy('name', 'asc')->get();
+        return view('tag', ['tag_info' => $tag, 'questions' => $questions, 'page_title' => 'Most Answered ' . $tag->name . ' Questions', 'sort' => 'top_answered', 'tags' => $tags]);
+    }
+
 }
