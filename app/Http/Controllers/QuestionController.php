@@ -24,7 +24,7 @@ class QuestionController extends Controller
         if (!$question)
             abort(404, "Page Not Found");
 
-        return view('question', ['answer_ids' => Answer::get_answer_ids($id), 'recent_questions' => Question::top_relevant(Question::get_tags($id),$id), 'answers' => Answer::get_sorted($id), 'question' => $question, 'page_title' => $question->question, 'tags' => Tag::get_tags(), 'is_question' => true]);
+        return view('question', ['answer_ids' => Answer::get_answer_ids($id), 'recent_questions' => Question::top_relevant(Question::get_tags($id)->toArray(),$id), 'answers' => Answer::get_sorted($id), 'question' => $question, 'page_title' => $question->question, 'tags' => Tag::get_tags(), 'is_question' => true]);
     }
 
     /**

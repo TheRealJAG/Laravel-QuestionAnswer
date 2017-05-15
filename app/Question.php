@@ -152,9 +152,8 @@ class Question extends Model {
         $tags = Question::join('tags_questions', 'tags_questions.question_id', '=', 'questions.id')
             ->join('tags', 'tags.id', '=', 'tags_questions.tag_id')
             ->where('tags_questions.question_id', '=', $id)
-            ->select('tags.*')
+            ->select('tags.name')
             ->get();
-
         return $tags;
     }
 
