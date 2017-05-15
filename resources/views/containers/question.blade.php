@@ -24,14 +24,16 @@ $shown = false;
             <h3 style="color: #2a88bd;font-weight: bolder;margin-top: 0"><a href="/question/{{$question->id}}/{{ \App\Question::get_url($question->question) }}" title="{{ e($question->question) }}">{{ e($question->question) }}</a></h3>
                 @if ( !$question->tags->isEmpty() )
                     @foreach( $question->tags as $tag )
-                        <a href="/tag/{{ strtolower($tag->name) }}" title="{{ $tag->name }}"><button type="button" class="btn btn-primary btn-xs"><i class="fa fa-hashtag" style="color: white;"></i> {{ $tag->name }}</button></a>
+                        <a href="/tag/{{ strtolower($tag->name) }}" title="{{ $tag->name }}"><button type="button" class="btn btn-primary btn-xs"><i class="fa fa-hashtag" style="color: white;font-weight: normal;"></i> {{ $tag->name }}</button></a>
                     @endforeach
                 @endif
             <span>
-                <a href="/level/{{ strtolower($question->level) }}" title="{{ $question->level }}"><button type="button" class="btn btn-primary btn-xs">{{ $question->level }}</button></a>
                 <small><strong>
                         Submitted {{date('F dS Y', strtotime($question->created_at))}} by <a href="/user/{{$question->user->id}}"  title="{{ $question->user->name }}">{{ucfirst($question->user->name)}}</a>
                         {{ $answer_number >= 1 ? $answer_number . ' ' . str_plural('answer', $answer_number) : ''  }}
+                        @if ($question->user_id == Auth::id())
+                            | <a href="/question/edit/{{$question->id}}">edit question</a>
+                        @endif
                     </strong></small>
             </span>
         </div>

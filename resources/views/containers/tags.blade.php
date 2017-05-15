@@ -1,7 +1,7 @@
 <div class="panel panel-default">
     <div class="panel-body">
         <legend class="text-left">
-            <h1>Tags</h1>
+            <h3>Tags</h3>
         </legend>
         <ul class="sidebar-nav sidebar-divider">
             @if ( !$tags->isEmpty() )

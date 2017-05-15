@@ -9,6 +9,7 @@ $(document).ready(function(){
             wildcard: '%QUERY%',
         }
     });
+
     tags.initialize();
 
     $('#txtTags').tagsinput({

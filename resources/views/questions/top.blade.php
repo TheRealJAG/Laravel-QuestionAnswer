@@ -26,7 +26,9 @@
 
                             @foreach( $questions as $question )
                                 @include('containers.question')
-                                <hr>
+                                @if($questions->last() != $question)
+                                    <hr>
+                                @endif
                             @endforeach
 
                             {{ $questions->links() }}

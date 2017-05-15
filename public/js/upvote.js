@@ -23,6 +23,7 @@ $(document).ready(function() {
                     }
                 $('a.upvote').removeClass('upvote-on'); // remove upvote highlight
                 $('a.downvote').removeClass('downvote-on'); // remove downvote highlight
+                history.pushState("", "Login", "/login"); // push the state to /login
                 $('#LoginModal').modal('show'); // show modal
                 return false;
             }

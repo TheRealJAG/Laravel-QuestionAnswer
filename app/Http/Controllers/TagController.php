@@ -2,9 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-
 use App\Tag;
 use App\Question;
 
@@ -13,64 +10,55 @@ class TagController extends Controller
     /**
      * Show new tag questions
      *
-     * @param  int  $tag_name
+     * @param  string  $name
      * @return Response
      */
-    public function show_new($tag_name)
+    public function show_new($name)
     {
-        $tag = Tag::where('name', '=', $tag_name)->get();
+        $tag = Tag::select('name')->where('name', '=', $name)->first();
 
-            if ($tag->isEmpty())
-                abort(404, "Page Not Found");
+        if (empty($tag))
+            abort(404, "Page Not Found");
 
-        $questions = Question::recent_relevant($tag);
-        $tag = $tag[0];
-        $tags = Tag::distinct()->orderBy('name', 'asc')->get();
-
-        return view('tag', ['tag_info' => $tag, 'questions' => $questions, 'page_title' => 'New ' . $tag->name . ' Questions', 'sort' => 'new', 'tags' => $tags]);
+        return view('tag', ['tag_info' => $tag, 'questions' => Question::recent_relevant($tag->toArray()), 'page_title' => 'Newest ' . $tag->name . ' Questions', 'sort' => 'new', 'tags' => Tag::get_tags()]);
     }
 
     /**
      * Show show top tag questions
      *
-     * @param  int  $tag_name
+     * @param  string  $name
      * @return Response
      */
-    public function show_top($tag_name)
+    public function show_top($name)
     {
-        $tag = Tag::where('name', '=', $tag_name)->get();
-        $questions = Question::top_relevant($tag);
-        $tag = $tag[0];
-        $tags = Tag::distinct()->orderBy('name', 'asc')->get();
-        return view('tag', ['tag_info' => $tag, 'questions' => $questions, 'page_title' => 'Top ' . $tag->name . ' Questions', 'sort' => 'top', 'tags' => $tags]);
+        $tag = Tag::select('name')->where('name', '=', $name)->first();
+        return view('tag', ['tag_info' => $tag, 'questions' => Question::top_relevant($tag->toArray()), 'page_title' => 'Top ' . $tag->name . ' Questions', 'sort' => 'top', 'tags' => Tag::get_tags()]);
     }
 
     /**
      * Get the top questions according to votes
+     * @param  string  $name
      * GET /questions/top
      * @return Redirect
      */
-    public function show_most_answered($tag_name)
+    public function show_most_answered($name)
     {
-        $tag = Tag::where('name', '=', $tag_name)->get();
-        $questions = Tag::most_answered($tag);
-        $tag = $tag[0];
-        $tags = Tag::distinct()->orderBy('name', 'asc')->get();
-        return view('tag', ['tag_info' => $tag, 'questions' => $questions, 'page_title' => 'Most Answered ' . $tag->name . ' Questions', 'sort' => 'top_answered', 'tags' => $tags]);
+        $tag = Tag::select('name')->where('name', '=', $name)->first();
+        $questions = Question::most_answered($tag->toArray());
+        return view('tag', ['tag_info' => $tag, 'questions' => $questions, 'page_title' => 'Most Answered ' . $tag->name . ' Questions', 'sort' => 'top_answered', 'tags' => Tag::get_tags()]);
     }
 
     /**
-     * Get the top questions according to votes
+     * Get unanswered questions according to votes
+     * @param  string  $name
      * GET /questions/top
      * @return Redirect
      */
-    public function show_unanswered($tag_name)
+    public function show_unanswered($name)
     {
-        $tag = Tag::where('name', '=', $tag_name)->get();
-        $questions = Tag::unanswered($tag);
-        $tag = $tag[0];
-        $tags = Tag::distinct()->orderBy('name', 'asc')->get();
-        return view('tag', ['tag_info' => $tag, 'questions' => $questions, 'page_title' => 'Most Answered ' . $tag->name . ' Questions', 'sort' => 'not_answered', 'tags' => $tags]);
+        $tag = Tag::select('name')->where('name', '=', $name)->first();
+        $questions = Question::unanswered($tag->toArray());
+        return view('tag', ['tag_info' => $tag, 'questions' => $questions, 'page_title' => 'Unanswered ' . $tag->name . ' Questions', 'sort' => 'not_answered', 'tags' => Tag::get_tags()]);
     }
 
 }

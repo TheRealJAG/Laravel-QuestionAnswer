@@ -17,48 +17,11 @@ class Tag extends Model
     }
 
     /**
-     * Returns questions sorted by most answers according to the tag object
-     * @param $tags - Tags object returned from get_tags()
-     * @return mixed
+     * Returns an object off all the tags being used by questions.
+     * @return object
      */
-    public static function most_answered($tags) {
-        $tag_array = array();
-        foreach($tags as $object)
-            $tag_array[] = $object->name;
-
-        $questions = Question::join('answers', 'questions.id', '=', 'answers.question_id')
-            ->join('tags_questions', 'tags_questions.question_id', '=', 'questions.id')
-            ->join('tags', 'tags.id', '=', 'tags_questions.tag_id')
-            ->select('questions.*', DB::raw('count(answers.id) as answers_ttl'))
-            ->whereIn('tags.name', $tag_array)
-            ->groupBy('questions.id')
-            ->orderBy('answers_ttl', 'desc')
-            ->orderBy('questions.created_at', 'desc')
-            ->paginate(self::$pagination_count);
-        return $questions;
+    public static function get_tags() {
+        return Tag::distinct()->orderBy('name', 'asc')->get();
     }
 
-    /**
-     * Returns un questions sorted by most answers according to the tag object
-     * @param $tags - Tags object returned from get_tags()
-     * @return mixed
-     */
-    public static function unanswered($tags) {
-        $tag_array = array();
-        foreach($tags as $object)
-            $tag_array[] = $object->name;
-
-        $questions = Question::leftJoin('answers', 'questions.id', '=', 'answers.question_id')
-            ->join('votes', 'questions.id', '=', 'votes.question_id')
-            ->join('tags_questions', 'tags_questions.question_id', '=', 'questions.id')
-            ->join('tags', 'tags.id', '=', 'tags_questions.tag_id')
-            ->select('questions.*', DB::raw('sum(votes.vote) as vote_ttl'))
-            ->whereIn('tags.name', $tag_array)
-            ->whereNull('answers.id')
-            ->groupBy('questions.id')
-            ->orderBy('vote_ttl', 'desc')
-            ->orderBy('questions.created_at', 'desc')
-            ->paginate(self::$pagination_count);
-        return $questions;
-    }
 }

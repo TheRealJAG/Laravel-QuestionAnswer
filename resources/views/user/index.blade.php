@@ -17,6 +17,9 @@
                         </ul>
                     </div>
                 </div>
+
+                @include('layouts.sidebar')
+
             </div>
             <div class="col-md-9">
                 <div class="panel panel-default">
@@ -32,7 +35,11 @@
                                 </div>
                                 <ul style="list-style-type: none; padding-left:0px;">
                                     @foreach( $questions as $question )
-                                        <li> @include('containers.question') <hr></li>
+                                        <li> @include('containers.question')
+                                            @if($questions->last() != $question)
+                                                <hr>
+                                            @endif
+                                        </li>
                                     @endforeach
                                     <li><a href="/user/{{ $user->id }}/questions">Show All</a></li>
                                 </ul>

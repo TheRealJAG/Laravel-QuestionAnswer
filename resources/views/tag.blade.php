@@ -4,6 +4,7 @@
         <div class="row">
             <div class="col-md-3 hidden-xs  hidden-sm">
                 @include('containers.tags')
+                @include('layouts.sidebar')
             </div>
             <div class="col-md-9">
                 <div class="panel panel-default">
@@ -20,15 +21,17 @@
                             </div>
 
                             <P>
-                                <a href="/tag/{{strtolower($tag_info->name)}}" class="btn btn-primary btn-rounded btn-large {{$sort == 'new' ? 'disabled' : ''}}" role="button"><i class="fa fa-angle-right" style="color: white;"></i> <b>New</b></a>
-                                <a href="/tag/{{strtolower($tag_info->name)}}/top" class="btn btn-primary btn-rounded btn-large {{$sort == 'top' ? 'disabled' : ''}}" role="button"><i class="fa fa-angle-right" style="color: white;"></i> <b>Top</b></a>
+                                <a href="/tag/{{strtolower($tag_info->name)}}" class="btn btn-primary btn-rounded btn-large {{$sort == 'new' ? 'disabled' : ''}}" role="button"><i class="fa fa-angle-right" style="color: white;"></i> <b>Newest</b></a>
+                                <a href="/tag/{{strtolower($tag_info->name)}}/top" class="btn btn-primary btn-rounded btn-large {{$sort == 'top' ? 'disabled' : ''}}" role="button"><i class="fa fa-angle-right" style="color: white;"></i> <b>Top Scoring</b></a>
                                 <a href="/tag/{{strtolower($tag_info->name)}}/most_answered" class="btn btn-primary btn-rounded btn-large {{$sort == 'top_answered' ? 'disabled' : ''}}" role="button"><i class="fa fa-angle-right" style="color: white;"></i> <b>Most Answered</b></a>
                                 <a href="/tag/{{strtolower($tag_info->name)}}/unanswered" class="btn btn-primary btn-rounded btn-large {{$sort == 'not_answered' ? 'disabled' : ''}}" role="button"><i class="fa fa-angle-right" style="color: white;"></i> <b>Unanswered</b></a>
                             </P><br>
 
                                 @foreach( $questions as $question )
                                     @include('containers.question')
-                                    <hr>
+                                    @if($questions->last() != $question)
+                                        <hr>
+                                    @endif
                                 @endforeach
 
                             {{ $questions->links() }}

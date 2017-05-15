@@ -17,7 +17,8 @@
                                 {{ Form::token() }}
                                 <div class="form-group">
                                     <div class="col-md-12">
-                                        {!! Form::text('question', null, ['class' => 'form-control', 'placeholder' => 'Should be in the form of an interview question...','required']) !!}
+                                        {!! Form::text('question', null, ['class' => 'form-control','maxlength' => 140, 'placeholder' => 'Should be in the form of an interview question...','required']) !!}
+                                        <small>140 character limit</small>
                                     </div>
                                 </div>
                             <div class="form-group">
@@ -33,18 +34,6 @@
                                                      @endif
 
                                                 {!! Form::text('tags', null, [ 'class' => 'form-control', 'id' => 'txtTags', 'name' => 'tags', 'data-role' => 'tagsinput', 'placeholder' => 'Add Tag', 'required']) !!}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-12">
-                                    <div class="tab-pane" id="skill_level" name="Skill Level">
-                                        <div class="row">
-                                            <div class="col-md-3">
-                                                <label for="txtTags">Skill Level</label><br>
-                                                {{ Form::select('level', ['Beginner' => 'Beginner', 'Intermediate' => 'Intermediate', 'Advanced' =>'Advanced']) }}
                                             </div>
                                         </div>
                                     </div>

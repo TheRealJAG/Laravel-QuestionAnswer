@@ -25,6 +25,8 @@
                         </ul>
                     </div>
                 </div>
+
+                @include('layouts.sidebar')
             </div>
 
             <div class="col-md-9">

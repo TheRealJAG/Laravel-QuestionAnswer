@@ -7,7 +7,9 @@ use Illuminate\Support\Facades\DB;
 
 class Question extends Model {
 
+    // Pagination Counts
     private static $pagination_count = 10;
+    private static $pagination_count_min = 5;
 
     // Create the relationship to users
     public function user() {
@@ -30,6 +32,45 @@ class Question extends Model {
         return $this->belongsToMany('App\Tag', 'tags_questions', 'question_id','tag_id');
     }
 
+
+    /**
+     * Returns questions sorted by most answers according to the tag object
+     * @param $tags - Tags object returned from get_tags()
+     * @return mixed
+     */
+    public static function most_answered($tags) {
+        $questions = Question::join('answers', 'questions.id', '=', 'answers.question_id')
+            ->join('tags_questions', 'tags_questions.question_id', '=', 'questions.id')
+            ->join('tags', 'tags.id', '=', 'tags_questions.tag_id')
+            ->select('questions.*', DB::raw('count(answers.id) as answers_ttl'))
+            ->whereIn('tags.name', $tags)
+            ->groupBy('questions.id')
+            ->orderBy('answers_ttl', 'desc')
+            ->orderBy('questions.created_at', 'desc')
+            ->paginate(self::$pagination_count);
+        return $questions;
+    }
+
+    /**
+     * Returns un questions sorted by most answers according to the tag object
+     * @param $tags - Tags object returned from get_tags()
+     * @return mixed
+     */
+    public static function unanswered($tags) {
+        $questions = Question::leftJoin('answers', 'questions.id', '=', 'answers.question_id')
+            ->join('votes', 'questions.id', '=', 'votes.question_id')
+            ->join('tags_questions', 'tags_questions.question_id', '=', 'questions.id')
+            ->join('tags', 'tags.id', '=', 'tags_questions.tag_id')
+            ->select('questions.*', DB::raw('sum(votes.vote) as vote_ttl'))
+            ->whereIn('tags.name', $tags)
+            ->whereNull('answers.id')
+            ->groupBy('questions.id')
+            ->orderBy('vote_ttl', 'desc')
+            ->orderBy('questions.created_at', 'desc')
+            ->paginate(self::$pagination_count);
+        return $questions;
+    }
+
     /**
      * Get the number of answers for a question
      * @return mixed
@@ -47,13 +88,8 @@ class Question extends Model {
      */
     public static function recent_relevant($tags,$question_id=0) {
 
-        // Convert $tags object to array for whereIn()
-        $tag_array = array();
-        foreach($tags as $object)
-            $tag_array[] = $object->name;
-
-        if ($question_id > 0) $num = 5;
-            else $num = 10;
+        if ($question_id > 0) $num = self::$pagination_count_min;
+            else $num = self::$pagination_count;
 
         // Get relevant questions except for $question_id
         // Attach AnswersCount - # answers per question
@@ -61,7 +97,7 @@ class Question extends Model {
             ->join('tags', 'tags.id', '=', 'tags_questions.tag_id')
             ->select('questions.*')
             ->where('questions.id', '!=' , $question_id)
-            ->whereIn('tags.name', $tag_array)
+            ->whereIn('tags.name', $tags)
             ->orderBy('questions.id', 'desc')
             ->paginate($num);
 
@@ -70,24 +106,19 @@ class Question extends Model {
 
     /**
      * Returns relevant questions sorted by vote according to the tag object
-     * @param $tags - Tags object returned from get_tags()
+     * @param $tags - Tags array returned from get_tags()
      * @return mixed
      */
     public static function top_relevant($tags,$question_id=0) {
 
-        if ($question_id > 0) $num = 5;
-        else $num = 10;
-
-        // Convert $tags object to array for whereIn()
-        $tag_array = array();
-        foreach($tags as $object)
-            $tag_array[] = $object->name;
+        if ($question_id > 0) $num = self::$pagination_count_min;
+        else $num = self::$pagination_count;
 
         $questions = Question::join('votes', 'questions.id', '=', 'votes.question_id')
             ->join('tags_questions', 'tags_questions.question_id', '=', 'questions.id')
             ->join('tags', 'tags.id', '=', 'tags_questions.tag_id')
             ->select('questions.*', DB::raw('sum(votes.vote) as vote_ttl'))
-            ->whereIn('tags.name', $tag_array)
+            ->whereIn('tags.name', $tags)
             ->where('questions.id', '!=', $question_id)
             ->groupBy('questions.id')
             ->orderBy('vote_ttl', 'desc')
@@ -99,29 +130,13 @@ class Question extends Model {
 
     /**
      * Returns relevant questions sorted by vote according to the tag object
-     * @param $tags - Tags object returned from get_tags()
+     * @param $tags - Tags array returned from get_tags()
      * @return mixed
      */
     public static function top() {
         $questions = Question::join('votes', 'questions.id', '=', 'votes.question_id')
             ->select('questions.*', DB::raw('sum(votes.vote) as vote_ttl'))
             ->groupBy('questions.id')
-            ->orderBy('vote_ttl', 'desc')
-            ->orderBy('questions.created_at', 'desc')
-            ->paginate(self::$pagination_count);
-        return $questions;
-    }
-
-    /**
-     * Returns relevant questions sorted by vote according to the tag object
-     * @param $tags - Tags object returned from get_tags()
-     * @return mixed
-     */
-    public static function level($level) {
-        $questions = Question::join('votes', 'questions.id', '=', 'votes.question_id')
-            ->select('questions.*', DB::raw('sum(votes.vote) as vote_ttl'))
-            ->groupBy('questions.id')
-            ->where('level', '=', $level)
             ->orderBy('vote_ttl', 'desc')
             ->orderBy('questions.created_at', 'desc')
             ->paginate(self::$pagination_count);
@@ -203,5 +218,25 @@ class Question extends Model {
             );
         }
         return $question;
+    }
+
+
+    /**
+     * Search
+     * @return object
+     */
+    public static function search($query) {
+        return Question::join('answers', 'questions.id', '=', 'answers.question_id')
+            ->join('votes', 'questions.id', '=', 'votes.question_id')
+            ->join('tags_questions', 'tags_questions.question_id', '=', 'questions.id')
+            ->join('tags', 'tags.id', '=', 'tags_questions.tag_id')
+            ->select('questions.*', DB::raw('sum(votes.vote) as vote_ttl'))
+            ->where('questions.question', 'LIKE', '%'.$query.'%')
+            ->orWhere('answers.answer', 'LIKE', '%'.$query.'%')
+            ->orWhere('tags.name', 'LIKE', '%'.$query.'%')
+            ->groupBy('questions.id')
+            ->orderBy('vote_ttl', 'desc')
+            ->orderBy('questions.created_at', 'desc')
+            ->paginate(self::$pagination_count);
     }
 }

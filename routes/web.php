@@ -13,6 +13,9 @@
 
 Auth::routes();
 
+// Search
+Route::get('/search/',['uses' => 'HomeController@search','as' => 'search']);
+
 Route::get('/', 'HomeController@index');
 
 // User Routes
@@ -25,10 +28,17 @@ Route::get('user/{id}/participation', 'UserController@participation');
 Route::get('level/{level}', 'LevelController@index');
 
 // Question Routes
+
+
+Route::get('question/edit/{id}', 'QuestionController@edit');
+
 Route::get('questions/top', 'QuestionController@top');
 Route::get('questions/new', 'QuestionController@newest');
 Route::get('question/{id}/{question}', 'QuestionController@show');
+
 Route::post('question', array( 'before'=>'csfr','uses'=>'QuestionController@insert' ) );
+Route::post('question/edit', array( 'before'=>'csfr','uses'=>'QuestionController@edit_save' ) );
+
 Route::get('question/ask', function () {
     return view('questions.ask', ['tags' => App\Tag::get()]);
 });
