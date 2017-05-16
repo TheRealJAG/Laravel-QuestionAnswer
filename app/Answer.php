@@ -2,11 +2,17 @@
 
 namespace App;
 
+use App\Events\AnswerEvent;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 
 class Answer extends Model
 {
+
+    protected $events = [
+      'created' => AnswerEvent::class
+    ];
+
     public function user() {
         return $this->belongsTo('App\User');
     }
