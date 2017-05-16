@@ -1,5 +1,5 @@
 ## About
-Vote based Question & Answer site built using Laravel 5.4, material design, x-editable and jQuery Upvote.
+Vote based Question & Answer site built using Laravel 5.4, material design, x-editable and jQuery Upvote. Registered users can submit questions, answer questions, vote on questions & answers and when an answer is posted to a question the author is notified via email.
 
 Demo: http://qna.therealjag.com
 
@@ -18,35 +18,34 @@ Demo: http://qna.therealjag.com
 ## Features
 
 ##### User
-* User registration
-* User profile
-* User participation
+* User Registration
+* User Profile
+* User Participation
 
 ##### Question
-* Assign tag(s)
-* Email notifications when answered
+* Top Questions
+* New Questions
+* Assign Tag(s)
+* Email Notifications
 * Upvote / Downvote
 
 ##### Answer
 * Upvote / Downvote
-* Inline edit 
-* Rank by votes
+* Inline Edit 
+* Rank by Votes
 
-##### Pages
-* Display top questions
-* Display new questions
-
-## Todo
-* Time between questions - disallow over posting
-* User groups
-* Moderation
-* Notifications
+##### Tags
+* Newest Questions
+* Top Scoring Questions
+* Most Answered
+* Unanswered
 
 ## License
 This software is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
 
 ## Screenshots
 The screenshots could be out of date. Check the demo site for the latest.
+
 ![Alt text](/public/images/screenshots/ScreenShot1.png?raw=true "Screanshot")
 ![Alt text](/public/images/screenshots/ScreenShot2.png?raw=true "Screanshot")
 ![Alt text](/public/images/screenshots/ScreenShot3.png?raw=true "Screanshot")
