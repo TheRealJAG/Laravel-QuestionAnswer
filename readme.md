@@ -1,5 +1,7 @@
 ## About
-Vote based Question & Answer site built using Laravel 5.4, material design, x-editable and jQuery Upvote. Registered users can submit questions, answer questions, vote on questions & answers and when an answer is posted to a question the author is notified via email.
+Vote based Question & Answer site built using Laravel 5.4, material design, x-editable and jQuery Upvote. 
+
+Registered users can submit questions, answer questions, vote on questions & answers and when an answer is posted to a question the author is notified via email.
 
 Demo: http://qna.therealjag.com
 
@@ -37,8 +39,8 @@ Demo: http://qna.therealjag.com
 ##### Tags
 * Newest Questions
 * Top Scoring Questions
-* Most Answered
-* Unanswered
+* Most Answered Questions
+* Unanswered Questions
 
 ## License
 This software is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
