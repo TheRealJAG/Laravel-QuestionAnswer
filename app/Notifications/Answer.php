@@ -65,9 +65,6 @@ class Answer extends Notification
      */
     public function toArray($notifiable)
     {
-        var_dump('toArray()');
-        return [
-            'workout' => 'TEST'
-        ];
+        return [];
     }
 }

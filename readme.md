@@ -24,8 +24,8 @@ Demo: http://qna.therealjag.com
 
 ##### Question
 * Assign tag(s)
+* Email notifications when answered
 * Upvote / Downvote
-* Level
 
 ##### Answer
 * Upvote / Downvote
@@ -46,6 +46,7 @@ Demo: http://qna.therealjag.com
 This software is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
 
 ## Screenshots
+The screenshots could be out of date. Check the demo site for the latest.
 ![Alt text](/public/images/screenshots/ScreenShot1.png?raw=true "Screanshot")
 ![Alt text](/public/images/screenshots/ScreenShot2.png?raw=true "Screanshot")
 ![Alt text](/public/images/screenshots/ScreenShot3.png?raw=true "Screanshot")
