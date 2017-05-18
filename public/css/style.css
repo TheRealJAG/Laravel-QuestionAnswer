@@ -140,4 +140,10 @@ select {
         padding-right: 0px;
     }
 }
-
+/* Style for the notification icon */
+.dropdown-menu li>a, .dropdown-menu li>span {
+    font-size: .8rem;
+    color: #4285F4;
+    display: block;
+    padding: 10px;
+}

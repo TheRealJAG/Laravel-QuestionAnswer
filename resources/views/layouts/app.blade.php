@@ -94,11 +94,7 @@
                                         <li><a href="/user/{{ Auth::user()->id }}/questions">My Questions</a></li>
                                         <li><a href="/user/{{ Auth::user()->id }}/answers">My Answers</a></li>
                                         <li>
-                                            <a href="/user/{{ Auth::user()->id }}/notifications">My Notifications
-                                                @if (count(Auth::user()->unreadnotifications) > 0)
-                                                    <span class="badge"><?= count(Auth::user()->unreadnotifications); ?></span>
-                                                @endif
-                                            </a>
+                                            <a href="/user/{{ Auth::user()->id }}/notifications">My Notifications</a>
                                         </li>
                                         <li class="divider"></li>
                                         <li><a href="/user/{{ Auth::user()->id }}">Profile</a></li>
@@ -117,7 +113,7 @@
                                 <?php
                                     // todo clean this up
                                     $notif_cnt = count(Auth::user()->unreadnotifications);
-                                    if ($notif_cnt > 0) echo "<li><a href='/user/".Auth::user()->id."/notifications' title='Show Notifications'><span class='badge' style='background-color:#fff;color: #000;'>$notif_cnt</span></a></li>";
+                                    if ($notif_cnt > 0) echo "<li><a href='/user/".Auth::user()->id."/notifications' title='Show Notifications' style='padding: 13px 0px;'><span class='badge' style='background-color:#fff;color: #333;'>$notif_cnt Notifications</span></a></li>";
                                 ?>
                             @endif
                         </ul>

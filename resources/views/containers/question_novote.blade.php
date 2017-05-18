@@ -13,10 +13,12 @@ $shown = false;
     <div class="col-xs-10 col-md-11">
         <h4 style="color: #2a88bd;font-weight: bolder;margin-top: 0;margin-bottom: 0px;"><a href="/question/{{$question->id}}/{{ \App\Question::get_url($question->question) }}" title="{{ e($question->question) }}">{{ e($question->question) }}</a></h4>
         <span>
-                <small><strong>
-                        {{date('F dS Y', strtotime($question->created_at))}} with
-                        {{ $answer_number >= 1 ? $answer_number . ' ' . str_plural('answer', $answer_number) : ''  }}
-                    </strong></small>
+                <small>
+                    <strong>
+                        {{date('F dS Y', strtotime($question->created_at))}}
+                        {{ $answer_number >= 1 ? $answer_number . ' with ' . str_plural('answer', $answer_number) : ''  }}
+                    </strong>
+                </small>
             </span>
     </div>
 </div>
