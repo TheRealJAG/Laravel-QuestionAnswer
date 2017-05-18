@@ -1,7 +1,7 @@
 ## About
-Vote based Question & Answer site built using Laravel 5.4, material design, x-editable and jQuery Upvote. 
+Vote based Question & Answer site built using Laravel 5.4, material design, x-editable, jQuery Upvote and email/database notifications. 
 
-Registered users can submit questions, answer questions, vote on questions & answers and when an answer is posted to a question the author is notified via email.
+Registered users can submit questions, answer questions, vote on questions & answers and when an answer is posted to a question the author is notified via email. Users will also be notified about votes, but only viewable in the their profile. 
 
 Demo: http://qna.therealjag.com
 
