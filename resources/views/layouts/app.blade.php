@@ -85,10 +85,21 @@
                                 <li><a href="{{ route('register') }}">Register</a></li>
                             @else
                                 <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        {{ Auth::user()->name }}
+
+                                        <span class="caret"></span>
+                                    </a>
                                     <ul class="dropdown-menu">
                                         <li><a href="/user/{{ Auth::user()->id }}/questions">My Questions</a></li>
                                         <li><a href="/user/{{ Auth::user()->id }}/answers">My Answers</a></li>
+                                        <li>
+                                            <a href="/user/{{ Auth::user()->id }}/notifications">My Notifications
+                                                @if (count(Auth::user()->unreadnotifications) > 0)
+                                                    <span class="badge"><?= count(Auth::user()->unreadnotifications); ?></span>
+                                                @endif
+                                            </a>
+                                        </li>
                                         <li class="divider"></li>
                                         <li><a href="/user/{{ Auth::user()->id }}">Profile</a></li>
                                         <li>
@@ -103,6 +114,11 @@
                                         </li>
                                     </ul>
                                 </li>
+                                <?php
+                                    // todo clean this up
+                                    $notif_cnt = count(Auth::user()->unreadnotifications);
+                                    if ($notif_cnt > 0) echo "<li><a href='/user/".Auth::user()->id."/notifications' title='Show Notifications'><span class='badge' style='background-color:#fff;color: #000;'>$notif_cnt</span></a></li>";
+                                ?>
                             @endif
                         </ul>
                     </div><!-- /.navbar-collapse -->

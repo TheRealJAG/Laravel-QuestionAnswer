@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Answer;
 use App\Question;
 use App\User;
-use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -44,7 +44,15 @@ class UserController extends Controller
     public function participation($id) {
         $user = User::findOrFail($id);
         $questions = User::get_participation($id);
-
         return view('user.participation')->with('user',$user)->with('questions',$questions)->with('page_title', $user->name . 'Answers');
+    }
+
+    public function notifications($id) {
+        $user = User::findOrFail($id);
+        if(Auth::user()->id == $id) {
+            return view('user.notifications')->with('user',$user)->with('user',$user)->with('page_title', $user->name . 'Notifications');
+        } else {
+            abort(401, "Unauthorized");
+        }
     }
 }

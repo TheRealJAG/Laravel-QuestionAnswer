@@ -16,6 +16,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\AnswerEvent' => [
             'App\Listeners\AnswerListener',
         ],
+        'App\Events\VoteEvent' => [
+            'App\Listeners\VoteListener',
+        ],
     ];
 
     /**

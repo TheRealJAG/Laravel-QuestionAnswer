@@ -5,14 +5,13 @@ namespace App\Notifications;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Notifications\Messages\MailMessage;
-//use Illuminate\Contracts\Queue\ShouldQueue;
 
 use App\Question;
 use App\User;
+use Carbon;
 
 class Answer extends Notification
 {
-    //use Queueable;
 
     protected $answer;
 
@@ -34,7 +33,7 @@ class Answer extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail','database'];
     }
 
     /**
@@ -49,12 +48,29 @@ class Answer extends Notification
         $user = User::find($this->answer['user_id']);
 
         return (new MailMessage)
-                    ->subject('Someone Answered Your Question')
-                    ->greeting('Someone Answered Your Question!')
-                    ->line($question->question)
-                    ->line($user->name . ' Said')
-                    ->line('"'.$this->answer['answer'].'"')
-                    ->action('See All Answers', url('/question/'.$question->id .'/'.Question::get_url($question->question)));
+            ->subject('Someone Answered Your Question')
+            ->greeting('Someone Answered Your Question!')
+            ->line($question->question)
+            ->line($user->name . ' Said')
+            ->line('"'.$this->answer['answer'].'"')
+            ->action('See All Answers', url('/question/'.$question->id .'/'.Question::get_url($question->question)));
+    }
+
+    /**
+     * Get the mail representation of the notification.
+     *
+     * @param  mixed  $notifiable
+     * @return \Illuminate\Notifications\Messages\MailMessage
+     */
+    public function toDatabase($notifiable)
+    {
+        $question = Question::find($this->answer['question_id']);
+        return [
+            'question_id' => $question->id,
+            'answer_id' => $this->answer['id'],
+            'user_id' => $this->answer['user_id'],
+            'created_at' => Carbon::now(),
+        ];
     }
 
     /**

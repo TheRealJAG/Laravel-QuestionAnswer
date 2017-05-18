@@ -19,14 +19,17 @@ Demo: http://qna.therealjag.com
 
 ## Features
 
+##### General
+* Email Notification - When a question is answered an email is sent to the question owner.
+* Database Notification - When a question is answered, question voted, answer voted. See your notifications in the user drop down. 
+* Mobile Friendly UI
+
 ##### User
 * User Registration
 * User Profile
-* User Participation
 
 ##### Question
-* Top Questions
-* New Questions
+* Top & New Pages
 * Assign Tag(s)
 * Email Notifications
 * Upvote / Downvote

@@ -23,6 +23,7 @@ Route::get('user/{id}', 'UserController@index');
 Route::get('user/{id}/questions', 'UserController@questions');
 Route::get('user/{id}/answers', 'UserController@answers');
 Route::get('user/{id}/participation', 'UserController@participation');
+Route::get('user/{id}/notifications', 'UserController@notifications');
 
 // User Routes
 Route::get('level/{level}', 'LevelController@index');

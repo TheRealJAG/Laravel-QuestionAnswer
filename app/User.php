@@ -46,19 +46,14 @@ class User extends Authenticatable
     }
 
     public static function get_participation($user_id) {
-
-        $questions = Question::join('answers', 'questions.user_id', '=', 'answers.user_id')
-            ->select(['questions.*'])
-            ->distinct()
-            ->with('answer_count')
+        $questions = Question::select(['questions.*'])
+            ->join('answers', 'questions.user_id', '=', 'answers.user_id')
             ->where([
                 ['questions.user_id', '=', $user_id],
                 ['answers.user_id', '=', $user_id],
             ])
-            ->paginate(10, ['questions.*']);
-
+            ->groupby('questions.question')
+            ->paginate(10);
         return $questions;
     }
-
-
 }
