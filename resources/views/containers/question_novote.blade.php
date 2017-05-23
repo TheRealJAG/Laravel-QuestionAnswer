@@ -11,7 +11,7 @@ $shown = false;
 <!-- Question Container-->
 <div class="row">
     <div class="col-xs-10 col-md-11">
-        <h4 style="color: #2a88bd;font-weight: bolder;margin-top: 0;margin-bottom: 0px;"><a href="/question/{{$question->id}}/{{ \App\Question::get_url($question->question) }}" title="{{ e($question->question) }}">{{ e($question->question) }}</a></h4>
+        <h4 style="color: #2a88bd;font-weight: bolder;margin-top: 0;margin-bottom: 0px;"><a href="/question/{{$question->id}}/{{ App\Classes\URL::get_url($question->question) }}" title="{{ e($question->question) }}">{{ e($question->question) }}</a></h4>
         <span>
                 <small>
                     <strong>

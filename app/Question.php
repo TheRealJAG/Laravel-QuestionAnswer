@@ -158,44 +158,6 @@ class Question extends Model {
     }
 
     /**
-     * Takes the question and makes a url string, SEO related.
-     * @param $question - Question string like a title.
-     * @return string
-     */
-    public static function get_url($question) {
-
-        $question = strtolower(strip_tags($question));
-        // Preserve escaped octets.
-        $question = preg_replace('|%([a-fA-F0-9][a-fA-F0-9])|', '---$1---', $question);
-        // Remove percent signs that are not part of an octet.
-        $question = str_replace('%', '', $question);
-        // Restore octets.
-        $question = preg_replace('|---([a-fA-F0-9][a-fA-F0-9])---|', '%$1', $question);
-        $question = preg_replace('/&.+?;/', '', $question); // kill entities
-        $question = str_replace('.', '-', $question);
-        $question = preg_replace('/[^%a-z0-9 _-]/', '', $question);
-        $question = preg_replace('/\s+/', '-', $question);
-        $question = preg_replace('|-+|', '-', $question);
-        $question = trim($question, '-');
-
-        // If we want to add stop words in the future, this is where we do it.
-        //  todo add more stop words
-        $stopwords = explode( ',',"a,an,and,are,is,the,of,for,in,what,whats,or,to,how,do,you,they,its,if,can,test,does,on,that,was");
-
-        $new_slug_parts = array_diff( explode( '-', $question ), $stopwords );
-
-        // Don't change the slug if there are less than 3 words left after removing stop words
-        if ( count( $new_slug_parts ) < 3 ) {
-            return $question;
-        }
-
-        // Turn the sanitized array into a string.
-        // Results in formatted SEO friendly string
-        $question = join( '-', $new_slug_parts );
-        return $question;
-    }
-
-    /**
      * Insert the question to the table.
      * @return object
      */

@@ -5,7 +5,7 @@
             <div class="col-md-9 col-md-push-3">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        @include('containers.question')
+                        @include('containers.question_nolink')
                         <br/>
                         <!-- Show the answer form -->
                         @if ((isset(Auth::user()->id) && Auth::user()->id != $question->user_id) && in_array(Auth::user()->id,$answer_ids) == FALSE)

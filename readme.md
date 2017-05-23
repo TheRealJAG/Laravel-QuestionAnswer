@@ -23,6 +23,7 @@ Demo: http://qna.therealjag.com
 * Email Notification - When a question is answered an email is sent to the question owner.
 * Database Notification - When a question is answered, question voted, answer voted. See your notifications in the user drop down. 
 * Mobile Friendly UI
+* SEO Friendly URLs
 
 ##### User
 * User Registration

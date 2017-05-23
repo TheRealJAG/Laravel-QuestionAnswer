@@ -21,7 +21,7 @@ $shown = false;
             {{ Form::close() }}
         </div>
         <div class="col-xs-10 col-md-11">
-            <h3 style="color: #2a88bd;font-weight: bolder;margin-top: 0"><a href="/question/{{$question->id}}/{{ \App\Question::get_url($question->question) }}" title="{{ e($question->question) }}">{{ e($question->question) }}</a></h3>
+            <h3 style="color: #2a88bd;font-weight: bolder;margin-top: 0"><a href="/question/{{$question->id}}/{{ App\Classes\URL::get_url($question->question) }}" title="{{ e($question->question) }}">{{ e($question->question) }}</a></h3>
                 @if ( !$question->tags->isEmpty() )
                     @foreach( $question->tags as $tag )
                         <a href="/tag/{{ strtolower($tag->name) }}" title="{{ $tag->name }}"><button type="button" class="btn btn-primary btn-xs"><i class="fa fa-hashtag" style="color: white;font-weight: normal;"></i> {{ $tag->name }}</button></a>
