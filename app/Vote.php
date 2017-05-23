@@ -34,7 +34,7 @@ class Vote extends Model
     }
 
     /**
-     * Vote - Handles vote logic, if identical previous/new vote destroy otherwise insert/update.
+     * Handles vote logic, if identical previous/new vote destroy otherwise insert/update.
      * @param $user_id
      * @param $id - ID question/answer
      * @param $vote - Integer of vote value
@@ -45,19 +45,10 @@ class Vote extends Model
         $voted = Vote::where('user_id', $user_id)->where($column, $id)->first();
         if (isset($voted->vote) && $voted->vote == $vote)  {
             Vote::destroy($voted->id);
-            $ajax_response = array(
-                'status' => 'success',
-                'msg' => 'Vote nullified on '. $column .' ' .$id,
-            );
+            $ajax_response = array('status' => 'success','msg' => "Vote nullified on $column $id");
         } else {
-            Vote::updateOrCreate(
-                [$column => $id,'user_id' => $user_id],
-                ['vote' => $vote]
-            );
-            $ajax_response = array(
-                'status' => 'success',
-                'msg' => 'Vote cast on '. $column .' ' .$id,
-            );
+            Vote::updateOrCreate([$column => $id,'user_id' => $user_id],['vote' => $vote]);
+            $ajax_response = array('status' => 'success','msg' => "Vote cast on $column $id");
         }
         return $ajax_response;
     }
