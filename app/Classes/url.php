@@ -9,17 +9,17 @@ namespace App\Classes;
 class URL
 {
 
-    // For SEO purposes, these are extremely common words that most search engines skip over in order to save space in their databases.
-    private static $stop_words = array("a","an","and","are","the","of","for","in","whats","or","to","how","do","you","your","they","its","if","can","test","does","on","that","was");
+    // Remove stop words from string?
+    private static $remove_stop_words = true;
 
     // Minimum number of words in slug to remove stop words from
     private static $min_word_count = 3;
 
+    // For SEO purposes, these are extremely common words that most search engines skip over in order to save space in their databases.
+    private static $stop_words = array("a","an","and","are","the","of","for","in","whats","or","to","how","do","you","your","they","its","if","can","test","does","on","that","was");
+
     // URL Slug
     private static $slug;
-
-    // Remove stop words from string?
-    private static $remove_stop_words = true;
 
     private static $string;
 
