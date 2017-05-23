@@ -18,9 +18,7 @@ class URL
     // For SEO purposes, these are extremely common words that most search engines skip over in order to save space in their databases.
     private static $stop_words = array("a","an","and","are","the","of","for","in","whats","or","to","how","do","you","your","they","its","if","can","test","does","on","that","was");
 
-    // URL Slug
     private static $slug;
-
     private static $string;
 
     /**
@@ -28,8 +26,9 @@ class URL
      * @param $sting
      * @return string
      */
-    public static function get_url($sting) {
+    public static function get_slug($sting) {
         self::$string = $sting;
+
         if (self::$remove_stop_words) {
             self::$slug = self::clean_string(self::$string);
             self::$slug = self::remove_stop_words(self::$slug);
