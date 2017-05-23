@@ -15,19 +15,15 @@ Demo: http://qna.therealjag.com
 
 ## Install
 * Clone project
-* Run migrations
+* Run Laravel migrations
 
 ## Features
 
 ##### General
-* Email Notification - When a question is answered an email is sent to the question owner.
-* Database Notification - When a question is answered, question voted, answer voted. See your notifications in the user drop down. 
-* Mobile Friendly UI
+* Email Notification - When a question is answered, an email notification is sent to question owner.
+* Database Notification - When a question is answered/voted or an answer is voted a notification is sent to the browser. See your notifications in the user drop down. 
+* Mobile Friendly UI - Responsive design with column ordering!
 * SEO Friendly URLs - Remove stop words from the URL string.
-
-##### User
-* User Registration
-* User Profile
 
 ##### Question
 * Top & New Pages
@@ -45,6 +41,10 @@ Demo: http://qna.therealjag.com
 * Top Scoring Questions
 * Most Answered Questions
 * Unanswered Questions
+
+##### User
+* User Registration
+* User Profile
 
 ## License
 This software is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).

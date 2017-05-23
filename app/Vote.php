@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use App\Events\VoteEvent;
 
+/**
+ * Class Vote
+ *
+ * @package App
+ */
 class Vote extends Model
 {
     protected $events = [
@@ -28,52 +33,30 @@ class Vote extends Model
         return $this->belongsTo('App\Answer');
     }
 
-    // Is the current and past vote the same? The user deselected the upvote/downvote...
-    // If so, remove all votes relating to question.
-    // todo same goes for answer
-    public static function vote_question($user_id, $question_id, $vote) {
-        $voted = Vote::where('user_id', $user_id)->where('question_id',$question_id)->first();
-
-        if (isset($voted->id)) {
+    /**
+     * Vote - Handles vote logic, if identical previous/new vote destroy otherwise insert/update.
+     * @param $user_id
+     * @param $id - ID question/answer
+     * @param $vote - Integer of vote value
+     * @param $column - the vote table uses question_id or answer_id
+     * @return array
+     */
+    public static function vote($user_id, $id, $vote, $column) {
+        $voted = Vote::where('user_id', $user_id)->where($column, $id)->first();
+        if (isset($voted->vote) && $voted->vote == $vote)  {
             Vote::destroy($voted->id);
             $ajax_response = array(
                 'status' => 'success',
-                'msg' => 'vote nullified on question id ' .$question_id,
+                'msg' => 'Vote nullified on '. $column .' ' .$id,
             );
         } else {
             Vote::updateOrCreate(
-                ['question_id' => $question_id,'user_id' => $user_id],
+                [$column => $id,'user_id' => $user_id],
                 ['vote' => $vote]
             );
             $ajax_response = array(
                 'status' => 'success',
-                'msg' => 'vote casted on question id ' . $question_id,
-            );
-        }
-        return $ajax_response;
-    }
-
-
-    public static function vote_answer($user_id,$answer_id,$vote) {
-        $voted = Vote::where('user_id', $user_id)
-            ->where('answer_id',$answer_id)
-            ->first();
-
-        if (isset($voted->id)) {
-            Vote::destroy($voted->id);
-            $ajax_response = array(
-                'status' => 'success',
-                'msg' => 'vote nullified',
-            );
-        } else {
-            Vote::updateOrCreate(
-                ['answer_id' => $answer_id,'user_id' => Auth::user()->id],
-                ['vote' => $vote]
-            );
-
-            $ajax_response = array(
-                'status' => 'success',
-                'msg' => 'vote casted...',
+                'msg' => 'Vote cast on '. $column .' ' .$id,
             );
         }
         return $ajax_response;

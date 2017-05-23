@@ -24,7 +24,7 @@ $shown = false;
         <h1 style="color: #000;font-weight: bolder;margin-top: 0;">{{ e($question->question) }}</h1>
         @if ( !$question->tags->isEmpty() )
             @foreach( $question->tags as $tag )
-                <a href="/tag/{{ strtolower($tag->name) }}" title="{{ $tag->name }}"><button type="button" class="btn btn-primary btn-xs"><i class="fa fa-hashtag" style="color: white;font-weight: lighter;"></i> {{ $tag->name }}</button></a>
+                <a href="/tag/{{ App\Classes\URL::get_slug($tag->name) }}" title="{{ $tag->name }}"><button type="button" class="btn btn-primary btn-xs"><i class="fa fa-hashtag" style="color: white;font-weight: lighter;"></i> {{ $tag->name }}</button></a>
             @endforeach
         @endif
         <span>

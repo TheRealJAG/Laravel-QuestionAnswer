@@ -7,7 +7,7 @@
             @if ( !$tags->isEmpty() )
                 @foreach( $tags as $tag )
                     @if ($tag->questions->count() > 0)
-                        <li style="color: black;"><a href="/tag/{{ strtolower($tag->name) }}" title="{{$tag->name}} Questions"> <i class="fa fa-ellipsis-v" style="color: #4285F4;"></i> <strong>{{ $tag->name }}</strong> <span class="badge badge-info pull-right" style="margin-top: 15px">{{$tag->questions->count()}}</span></a></li>
+                        <li style="color: black;"><a href="/tag/{{ App\Classes\URL::get_slug($tag->name) }}" title="{{$tag->name}} Questions"> <i class="fa fa-ellipsis-v" style="color: #4285F4;"></i> <strong>{{ $tag->name }}</strong> <span class="badge badge-info pull-right" style="margin-top: 15px">{{$tag->questions->count()}}</span></a></li>
                     @endif
                 @endforeach
             @endif

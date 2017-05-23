@@ -12,11 +12,11 @@ class VoteController extends Controller
 {
     public function vote_question()
     {
-        return Response::json(Vote::vote_question(Auth::id(), Request::get('question_id'), Request::get('vote')));
+        return Response::json(Vote::vote(Auth::id(), Request::get('question_id'), Request::get('vote'), 'question_id'));
     }
 
     public function vote_answer()
     {
-        return Response::json(Vote::vote_answer(Auth::id(), Request::get('answer_id'), Request::get('vote')));
+        return Response::json(Vote::vote(Auth::id(), Request::get('answer_id'), Request::get('vote'), 'answer_id'));
     }
 }

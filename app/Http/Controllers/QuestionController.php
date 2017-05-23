@@ -55,7 +55,7 @@ class QuestionController extends Controller
     public function insert()
     {
         $question = Question::insert(Auth::user()->id, Request::get('tags'), Request::get('question'), Request::get('level'));
-        return Redirect::to('question/'.$question->id.'/'.\App\Question::get_url($question->question));
+        return Redirect::to('question/'.$question->id.'/'.\App\Classes\URL::get_slug($question->question));
     }
 
     /**
@@ -80,6 +80,6 @@ class QuestionController extends Controller
         $q = Question::find($id);
         $q->question = $question;
         $q->save();
-        return Redirect::to('question/'.$id.'/'.\App\Question::get_url($question));
+        return Redirect::to('question/'.$id.'/'.\App\Classes\URL::get_slug($question));
     }
 }

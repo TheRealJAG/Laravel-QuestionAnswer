@@ -10,7 +10,7 @@ $(document).ready(function() {
     $('.vote_q').on('click', function (e) {
         var data = {vote: $(this).data('vote'), question_id: $(this).parent().data('question')};
         var uid = $(this).parent().data('uid');
-        var question_id = $(this).parent().data('question');
+        //var question_id = $(this).parent().data('question');
 
         if ($(this).parent().data('question')) {
             if (uid == '') { // visitor is guest, throw a modal and correct the vote value, reset arrow
