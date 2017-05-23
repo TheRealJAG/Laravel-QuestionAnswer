@@ -52,17 +52,4 @@ class User extends Authenticatable
             ->get();
         return $notifications;
     }
-
-/*
-    public static function get_participation($user_id) {
-        $questions = Question::select(['questions.*'])
-            ->join('answers', 'questions.user_id', '=', 'answers.user_id')
-            ->where([
-                ['questions.user_id', '=', $user_id],
-                ['answers.user_id', '=', $user_id],
-            ])
-            ->groupby('questions.question')
-            ->paginate(10);
-        return $questions;
-    }*/
 }
