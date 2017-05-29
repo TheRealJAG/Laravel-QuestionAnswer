@@ -46,6 +46,9 @@ Demo: http://qna.therealjag.com
 * User Registration
 * User Profile
 
+##### Testing
+* Yes! - See tests directory...
+
 ## License
 This software is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
 

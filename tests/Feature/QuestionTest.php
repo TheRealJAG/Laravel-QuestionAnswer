@@ -17,20 +17,8 @@ use App\Vote;
 class QuestionTest extends TestCase
 {
 
-    public $user;
-    public $question;
-    public $answer;
-    public $vote_question;
-    public $vote_answer;
-
-    public function homepage_check() {
-        $response = $this->get('/');
-        $response->assertStatus(200);
-    }
-
     public function testApplication()
     {
-
         // Test inserting a user
         $this->user = factory(User::class)->create();
         if (!$this->user) return false;
@@ -53,17 +41,5 @@ class QuestionTest extends TestCase
 
         // This test should also produce records in the notifications table
         // See notifications table...
-
-
-
     }
-
-
-
-
-
-
-
-
-
 }
