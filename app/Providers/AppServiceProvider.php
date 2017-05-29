@@ -13,7 +13,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // Bind the tags to the tag container
+        view()->composer('containers.tags',function ($view) {
+            $view->with('tags', \App\Tag::get_tags());
+        });
     }
 
     /**

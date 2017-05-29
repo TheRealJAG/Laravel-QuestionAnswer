@@ -45,7 +45,7 @@ class TagController extends Controller
     {
         $tag = Tag::select('name')->where('name', '=', $name)->first();
         $questions = Question::most_answered($tag->toArray());
-        return view('tag', ['tag_info' => $tag, 'questions' => $questions, 'page_title' => 'Most Answered ' . $tag->name . ' Questions', 'sort' => 'top_answered', 'tags' => Tag::get_tags()]);
+        return view('tag', ['tag_info' => $tag, 'questions' => $questions, 'page_title' => 'Most Answered ' . $tag->name . ' Questions', 'sort' => 'top_answered']);
     }
 
     /**
@@ -58,7 +58,7 @@ class TagController extends Controller
     {
         $tag = Tag::select('name')->where('name', '=', $name)->first();
         $questions = Question::unanswered($tag->toArray());
-        return view('tag', ['tag_info' => $tag, 'questions' => $questions, 'page_title' => 'Unanswered ' . $tag->name . ' Questions', 'sort' => 'not_answered', 'tags' => Tag::get_tags()]);
+        return view('tag', ['tag_info' => $tag, 'questions' => $questions, 'page_title' => 'Unanswered ' . $tag->name . ' Questions', 'sort' => 'not_answered']);
     }
 
 }

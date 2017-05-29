@@ -34,7 +34,8 @@ class Vote extends Model
     }
 
     /**
-     * Handles vote logic, if identical previous/new vote destroy otherwise insert/update.
+     * Insert/Update & Delete from votes table
+     * If identical previous/new vote destroy otherwise insert/update.
      * @param $user_id
      * @param $id - ID question/answer
      * @param $vote - Integer of vote value

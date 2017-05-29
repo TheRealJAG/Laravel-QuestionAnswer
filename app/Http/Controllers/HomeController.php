@@ -15,8 +15,8 @@ class HomeController extends Controller {
      */
     public function index() {
         $questions = Question::orderBy('created_at', 'desc')->paginate(10);
-        $tags = Tag::distinct()->orderBy('name', 'asc')->get();
-        return view('index')->with('questions', $questions)->with('tags', $tags)->with('page_title','Q&A - Interview Questions');
+        $top = Question::top_limited(3);
+        return view('index')->with('questions', $questions)->with('top', $top)->with('page_title','Q&A - Interview Questions');
     }
 
     /**
@@ -26,7 +26,6 @@ class HomeController extends Controller {
     public function search() {
         $query =  Input::get('query');
         $questions = Question::search($query);
-        $tags = Tag::distinct()->orderBy('name', 'asc')->get();
-        return view('search')->with('questions', $questions)->with('tags', $tags)->with('page_title','Search')->with('query',$query);
+        return view('search')->with('questions', $questions)->with('page_title','Search')->with('query',$query);
     }
 }

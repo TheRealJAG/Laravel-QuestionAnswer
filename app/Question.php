@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Carbon;
 
 class Question extends Model {
 
@@ -129,8 +130,7 @@ class Question extends Model {
     }
 
     /**
-     * Returns relevant questions sorted by vote according to the tag object
-     * @param $tags - Tags array returned from get_tags()
+     * Returns relevant questions sorted by vote count
      * @return mixed
      */
     public static function top() {
@@ -140,6 +140,22 @@ class Question extends Model {
             ->orderBy('vote_ttl', 'desc')
             ->orderBy('questions.created_at', 'desc')
             ->paginate(self::$pagination_count);
+        return $questions;
+    }
+
+    /**
+     * Returns relevant questions sorted by vote count
+     * @param $limit - Number of questions to return
+     * @return mixed
+     */
+    public static function top_limited($limit) {
+        $questions = Question::join('votes', 'questions.id', '=', 'votes.question_id')
+            ->select('questions.*', DB::raw('sum(votes.vote) as vote_ttl'))
+            ->groupBy('questions.id')
+            ->where('questions.created_at', '>=', '2013-04-29 02:10:22')
+            ->orderBy('vote_ttl', 'desc')
+            ->orderBy('questions.created_at', 'desc')
+            ->paginate($limit);
         return $questions;
     }
 

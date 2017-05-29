@@ -24,7 +24,7 @@ class QuestionController extends Controller
         if (!$question)
             abort(404, "Page Not Found");
 
-        return view('question', ['answer_ids' => Answer::get_answer_ids($id), 'recent_questions' => Question::top_relevant(Question::get_tags($id)->toArray(),$id), 'answers' => Answer::get_sorted($id), 'question' => $question, 'page_title' => $question->question, 'tags' => Tag::get_tags(), 'is_question' => true]);
+        return view('question', ['answer_ids' => Answer::get_answer_ids($id), 'recent_questions' => Question::top_relevant(Question::get_tags($id)->toArray(),$id), 'answers' => Answer::get_sorted($id), 'question' => $question, 'page_title' => $question->question, 'is_question' => true]);
     }
 
     /**
@@ -34,7 +34,7 @@ class QuestionController extends Controller
      */
     public function top()
     {
-        return view('questions.top', ['questions' => Question::top(), 'page_title' => 'Top Questions', 'sort' =>'top', 'tags' => Tag::get_tags()]);
+        return view('questions.top', ['questions' => Question::top(), 'page_title' => 'Top Questions', 'sort' =>'top']);
     }
 
     /**
@@ -44,7 +44,7 @@ class QuestionController extends Controller
      */
     public function newest()
     {
-        return view('questions.new', ['questions' => Question::orderBy('created_at', 'desc')->paginate(10), 'page_title' => 'New Questions', 'sort' =>'new', 'tags' => Tag::get_tags()]);
+        return view('questions.new', ['questions' => Question::orderBy('created_at', 'desc')->paginate(10), 'page_title' => 'New Questions', 'sort' =>'new']);
     }
 
     /**
@@ -65,7 +65,7 @@ class QuestionController extends Controller
      */
     public function edit($id)
     {
-        return view('questions.edit', ['question' => Question::find($id), 'page_title' => 'Edit Questions', 'tags' => Tag::get_tags()]);
+        return view('questions.edit', ['question' => Question::find($id), 'page_title' => 'Edit Questions']);
     }
     /**
      * Get the newest questions
