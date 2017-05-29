@@ -52,10 +52,9 @@ class Answer extends Model
      */
     public static function get_sorted($question_id) {
         $answer = Answer::where('question_id', '=', $question_id)->get();
-        $answer = $answer->sortByDesc(function ($answer) {
+        return $answer->sortByDesc(function ($answer) {
             return $answer->votes->sum('vote');
         });
-        return $answer;
     }
 
     /**

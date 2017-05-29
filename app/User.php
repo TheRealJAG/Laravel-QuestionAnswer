@@ -47,9 +47,8 @@ class User extends Authenticatable
     // Needs mysql 5.7
     // Would allow to check past notifications
     public static function get_meta($question_id) {
-        $notifications = DB::table('notifications')
+        return DB::table('notifications')
             ->where('data->question_id', '=', $question_id)
             ->get();
-        return $notifications;
     }
 }

@@ -40,7 +40,7 @@ class Question extends Model {
      * @return mixed
      */
     public static function most_answered($tags) {
-        $questions = Question::join('answers', 'questions.id', '=', 'answers.question_id')
+        return Question::join('answers', 'questions.id', '=', 'answers.question_id')
             ->join('tags_questions', 'tags_questions.question_id', '=', 'questions.id')
             ->join('tags', 'tags.id', '=', 'tags_questions.tag_id')
             ->select('questions.*', DB::raw('count(answers.id) as answers_ttl'))
@@ -49,7 +49,6 @@ class Question extends Model {
             ->orderBy('answers_ttl', 'desc')
             ->orderBy('questions.created_at', 'desc')
             ->paginate(self::$pagination_count);
-        return $questions;
     }
 
     /**
@@ -58,7 +57,7 @@ class Question extends Model {
      * @return mixed
      */
     public static function unanswered($tags) {
-        $questions = Question::leftJoin('answers', 'questions.id', '=', 'answers.question_id')
+        return Question::leftJoin('answers', 'questions.id', '=', 'answers.question_id')
             ->join('votes', 'questions.id', '=', 'votes.question_id')
             ->join('tags_questions', 'tags_questions.question_id', '=', 'questions.id')
             ->join('tags', 'tags.id', '=', 'tags_questions.tag_id')
@@ -69,7 +68,6 @@ class Question extends Model {
             ->orderBy('vote_ttl', 'desc')
             ->orderBy('questions.created_at', 'desc')
             ->paginate(self::$pagination_count);
-        return $questions;
     }
 
     /**
@@ -88,21 +86,18 @@ class Question extends Model {
      * @return mixed
      */
     public static function recent_relevant($tags,$question_id=0) {
-
         if ($question_id > 0) $num = self::$pagination_count_min;
             else $num = self::$pagination_count;
 
         // Get relevant questions except for $question_id
         // Attach AnswersCount - # answers per question
-        $questions = Question::join('tags_questions', 'tags_questions.question_id', '=', 'questions.id')
+        return Question::join('tags_questions', 'tags_questions.question_id', '=', 'questions.id')
             ->join('tags', 'tags.id', '=', 'tags_questions.tag_id')
             ->select('questions.*')
             ->where('questions.id', '!=' , $question_id)
             ->whereIn('tags.name', $tags)
             ->orderBy('questions.id', 'desc')
             ->paginate($num);
-
-        return $questions;
     }
 
     /**
@@ -115,7 +110,7 @@ class Question extends Model {
         if ($question_id > 0) $num = self::$pagination_count_min;
         else $num = self::$pagination_count;
 
-        $questions = Question::join('votes', 'questions.id', '=', 'votes.question_id')
+        return Question::join('votes', 'questions.id', '=', 'votes.question_id')
             ->join('tags_questions', 'tags_questions.question_id', '=', 'questions.id')
             ->join('tags', 'tags.id', '=', 'tags_questions.tag_id')
             ->select('questions.*', DB::raw('sum(votes.vote) as vote_ttl'))
@@ -125,8 +120,6 @@ class Question extends Model {
             ->orderBy('vote_ttl', 'desc')
             ->orderBy('questions.created_at', 'desc')
             ->paginate($num);
-
-        return $questions;
     }
 
     /**
@@ -134,13 +127,12 @@ class Question extends Model {
      * @return mixed
      */
     public static function top() {
-        $questions = Question::join('votes', 'questions.id', '=', 'votes.question_id')
+        return Question::join('votes', 'questions.id', '=', 'votes.question_id')
             ->select('questions.*', DB::raw('sum(votes.vote) as vote_ttl'))
             ->groupBy('questions.id')
             ->orderBy('vote_ttl', 'desc')
             ->orderBy('questions.created_at', 'desc')
             ->paginate(self::$pagination_count);
-        return $questions;
     }
 
     /**
@@ -149,14 +141,13 @@ class Question extends Model {
      * @return mixed
      */
     public static function top_limited($limit) {
-        $questions = Question::join('votes', 'questions.id', '=', 'votes.question_id')
+        return Question::join('votes', 'questions.id', '=', 'votes.question_id')
             ->select('questions.*', DB::raw('sum(votes.vote) as vote_ttl'))
             ->groupBy('questions.id')
             ->where('questions.created_at', '>=', '2013-04-29 02:10:22')
             ->orderBy('vote_ttl', 'desc')
             ->orderBy('questions.created_at', 'desc')
             ->paginate($limit);
-        return $questions;
     }
 
     /**
@@ -165,12 +156,11 @@ class Question extends Model {
      * @return mixed
      */
     public static function get_tags($id) {
-        $tags = Question::join('tags_questions', 'tags_questions.question_id', '=', 'questions.id')
+        return Question::join('tags_questions', 'tags_questions.question_id', '=', 'questions.id')
             ->join('tags', 'tags.id', '=', 'tags_questions.tag_id')
             ->where('tags_questions.question_id', '=', $id)
             ->select('tags.name')
             ->get();
-        return $tags;
     }
 
     /**
