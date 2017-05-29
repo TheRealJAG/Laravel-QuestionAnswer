@@ -14,6 +14,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         // Bind the tags to the tag container
+        // This way it's not necessary to pass in controllers.
         view()->composer('containers.tags',function ($view) {
             $view->with('tags', \App\Tag::get_tags());
         });

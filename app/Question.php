@@ -33,6 +33,15 @@ class Question extends Model {
         return $this->belongsToMany('App\Tag', 'tags_questions', 'question_id','tag_id');
     }
 
+    /**
+     * Returns pagination count based on if int is > 0
+     * @param $int
+     * @return int
+     */
+    private static function get_pagination($int) {
+        if ($int > 0) return self::$pagination_count_min;
+        else return self::$pagination_count;
+    }
 
     /**
      * Returns questions sorted by most answers according to the tag object
@@ -81,23 +90,19 @@ class Question extends Model {
     }
 
     /**
-     * Returns relevant questions according to the tag object
-     * @param $tags - Tags object returned from get_tags()
+     * Get relevant questions except for $question_id
+     * @param $tags
+     * @param $question_id
      * @return mixed
      */
     public static function recent_relevant($tags,$question_id=0) {
-        if ($question_id > 0) $num = self::$pagination_count_min;
-            else $num = self::$pagination_count;
-
-        // Get relevant questions except for $question_id
-        // Attach AnswersCount - # answers per question
         return Question::join('tags_questions', 'tags_questions.question_id', '=', 'questions.id')
             ->join('tags', 'tags.id', '=', 'tags_questions.tag_id')
             ->select('questions.*')
             ->where('questions.id', '!=' , $question_id)
             ->whereIn('tags.name', $tags)
             ->orderBy('questions.id', 'desc')
-            ->paginate($num);
+            ->paginate(self::get_pagination($question_id));
     }
 
     /**
@@ -106,10 +111,6 @@ class Question extends Model {
      * @return mixed
      */
     public static function top_relevant($tags,$question_id=0) {
-
-        if ($question_id > 0) $num = self::$pagination_count_min;
-        else $num = self::$pagination_count;
-
         return Question::join('votes', 'questions.id', '=', 'votes.question_id')
             ->join('tags_questions', 'tags_questions.question_id', '=', 'questions.id')
             ->join('tags', 'tags.id', '=', 'tags_questions.tag_id')
@@ -119,7 +120,7 @@ class Question extends Model {
             ->groupBy('questions.id')
             ->orderBy('vote_ttl', 'desc')
             ->orderBy('questions.created_at', 'desc')
-            ->paginate($num);
+            ->paginate(self::get_pagination($question_id));
     }
 
     /**
@@ -147,7 +148,8 @@ class Question extends Model {
             ->where('questions.created_at', '>=', '2013-04-29 02:10:22')
             ->orderBy('vote_ttl', 'desc')
             ->orderBy('questions.created_at', 'desc')
-            ->paginate($limit);
+            ->limit($limit)
+            ->get();
     }
 
     /**
@@ -166,23 +168,24 @@ class Question extends Model {
     /**
      * Insert the question to the table.
      * @return object
+     * todo remove level
      */
     public static function insert($user_id, $tags, $question_text, $level) {
-        $tags = $tags;
         $question = new Question;
         $question->question = $question_text;
         $question->level = $level;
         $question->user_id = $user_id;
         $question->save();
 
-        // todo There might be a better way to handle this in Laravel
-        $tags = array_unique(explode(',',$tags));
-
-        // Don't have a model for tags_questions
-        foreach ($tags as $tag) {
-            DB::table('tags_questions')->insert(
-                ['tag_id' => $tag, 'question_id' => $question->id]
-            );
+        if (!empty($tags)) {
+            $tags = array_unique(explode(',',$tags));
+            if (is_array($tags)) {
+                foreach ($tags as $tag) {
+                    DB::table('tags_questions')->insert(
+                        ['tag_id' => $tag, 'question_id' => $question->id]
+                    );
+                }
+            }
         }
         return $question;
     }

@@ -23,15 +23,18 @@
                 <div class="col-md-12">
                     <div class="panel panel-default">
                         <div class="panel-body">
-                            <legend class="text-left">
-                                <h1>Top Questions</h1>
-                            </legend>
-                            @foreach( $top as $question )
-                                @include('containers.question')
-                                @if($questions->last() != $question)
-                                    <hr>
-                                @endif
-                            @endforeach
+                            @if (!empty($top))
+                                <legend class="text-left">
+                                    <h1>Top Questions</h1>
+                                </legend>
+                                @foreach( $top as $question )
+                                    @include('containers.question_novote')
+                                    @if($top->last() != $question)
+                                        <hr>
+                                    @endif
+                                @endforeach
+                                <br>
+                            @endif
 
                             <legend class="text-left">
                                 <h1>Recent Questions</h1>

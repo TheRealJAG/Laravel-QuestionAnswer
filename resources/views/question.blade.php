@@ -4,6 +4,11 @@
         <div class="row">
             <div class="col-md-9 col-md-push-3">
                 <div class="panel panel-default">
+
+                    @if (Session::has('flash_message'))
+                        <div class="alert alert-success">{!!Session::get('flash_message')!!}</div>
+                    @endif
+
                     <div class="panel-body">
                         @include('containers.question_nolink')
                         <br/>

@@ -38,8 +38,10 @@ class VoteListener
     public function handle(VoteEvent $event)
     {
         $vote = $event->vote->toArray();
-        $question = Question::find($vote['question_id']);
-        $user = User::find($question->user_id);
-        Notification::send($user, new Vote($vote));
+            if (isset($vote['question_id'])) {
+                $question = Question::find($vote['question_id']);
+                $user = User::find($question->user_id);
+                Notification::send($user, new Vote($vote));
+            }
     }
 }

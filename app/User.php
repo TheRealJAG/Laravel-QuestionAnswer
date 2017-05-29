@@ -17,8 +17,7 @@ class User extends Authenticatable
      *
      * @return string
      */
-    public function routeNotificationForMail()
-    {
+    public function routeNotificationForMail() {
         return $this->email;
     }
 

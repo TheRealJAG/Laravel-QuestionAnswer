@@ -9,7 +9,6 @@ if (isset($answer_count[0])) {
 $shown = false;
 ?>
 
-
 <!-- Question Container-->
 <div class="row">
     <div class="col-xs-10 col-md-11">
