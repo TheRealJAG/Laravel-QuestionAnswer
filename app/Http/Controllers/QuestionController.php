@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Session;
 use App\Answer;
 use App\Question;
 use App\Classes\URL;
+use App\Classes\QuestionValidation;
 
 class QuestionController extends Controller
 {
@@ -51,7 +52,15 @@ class QuestionController extends Controller
      * @return Redirect
      */
     public function insert() {
-        $question = Question::insert(Auth::user()->id, Request::get('tags'), Request::get('question'), Request::get('level'));
+
+        // Check for duplicate
+        $are_duplicates = QuestionValidation::CheckDuplicateStrict(Request::get('question'), Request::get('tags'));
+        if (is_object($are_duplicates)) {
+            Session::flash('flash_message','<P><h3>Question Already Asked</h3></P><P>This question has already been asked by a community member.</P>');
+            return Redirect::to('question/'.$are_duplicates->id.'/'.URL::get_slug($are_duplicates->question));
+        }
+
+        $question = Question::insert(Auth::user()->id, Request::get('tags'), Request::get('question'));
         Session::flash('flash_message','<P><h3>Question Added</h3></P><P>You\'ll be notified of new answers or votes immediately!</P>');
         return Redirect::to('question/'.$question->id.'/'.URL::get_slug($question->question));
     }

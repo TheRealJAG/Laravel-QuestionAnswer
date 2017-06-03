@@ -14,7 +14,6 @@
                                         <div id="questions">
                                             <legend class="text-left">Recent Questions</legend>
                                         </div>
-
                                         <ul style="list-style-type: none; padding-left:0px;">
                                             @foreach( $questions as $question )
                                                 <li>
@@ -41,7 +40,7 @@
                                                     <div class="row panel">
                                                         <div class="col-md-12">
                                                             <div class="header">
-                                                                <h4 style="margin: 0;display: inline;"><a href="/question/{{$answer->question->id}}/{{ App\Classes\URL::get_slug($answer->question->question) }}" title="{{ e($question->question) }}">{{ ucfirst($answer->question->question) }}</a></h4> <small>{{ e($answer->created_at->diffForHumans()) }}</small>
+                                                                <h4 style="margin: 0;display: inline;"><a href="/question/{{$answer->question->id}}/{{ App\Classes\URL::get_slug($answer->question->question) }}" title="{{ e($answer->question->question) }}">{{ ucfirst($answer->question->question) }}</a></h4> <small>{{ e($answer->created_at->diffForHumans()) }}</small>
                                                                 <p>{{$answer->answer}}</p>
                                                             </div>
                                                         </div>

@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+
 use Carbon;
 
 class Question extends Model {
@@ -168,12 +169,10 @@ class Question extends Model {
     /**
      * Insert the question to the table.
      * @return object
-     * todo remove level
      */
-    public static function insert($user_id, $tags, $question_text, $level) {
+    public static function insert($user_id, $tags, $question_text) {
         $question = new Question;
         $question->question = $question_text;
-        $question->level = $level;
         $question->user_id = $user_id;
         $question->save();
 

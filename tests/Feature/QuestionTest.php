@@ -17,14 +17,18 @@ use App\Vote;
 class QuestionTest extends TestCase
 {
 
-    public function testApplication()
+    public function testStart() {
+        echo 'Start';
+    }
+
+    public function testQuestion()
     {
         // Test inserting a user
         $this->user = factory(User::class)->create();
         if (!$this->user) return false;
 
         // Test inserting a question with user data
-        $this->question = Question::insert($this->user->id, '', 'I\'m just a test question. Please delete me. Thank you!', '');
+        $this->question = Question::insert($this->user->id, '', 'I\'m just a test question. Please delete me. Thank you!');
         if (!$this->question) return false;
 
         // Test a simple answer to that question
@@ -42,4 +46,27 @@ class QuestionTest extends TestCase
         // This test should also produce records in the notifications table
         // See notifications table...
     }
+
+    // Test a user creation and all user pages.
+    public function testUser() {
+        $this->user = factory(User::class)->create();
+        if (!$this->user) return false;
+
+        $response = $this->call('GET', '/user/'.$this->user->id);
+        $this->assertEquals(200, $response->status());
+
+        $response = $this->call('GET', '/user/'.$this->user->id.'/questions');
+        $this->assertEquals(200, $response->status());
+
+        $response = $this->call('GET', '/user/'.$this->user->id.'/answers');
+        $this->assertEquals(200, $response->status());
+    }
+
+    public function testStope() {
+        echo 'DONE';
+    }
+
+
+
+
 }
