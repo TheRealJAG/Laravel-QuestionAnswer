@@ -17,10 +17,6 @@ use App\Vote;
 class QuestionTest extends TestCase
 {
 
-    public function testStart() {
-        echo 'Start';
-    }
-
     public function testQuestion()
     {
         // Test inserting a user
@@ -45,6 +41,7 @@ class QuestionTest extends TestCase
 
         // This test should also produce records in the notifications table
         // See notifications table...
+        print "Done Testing testQuestion";
     }
 
     // Test a user creation and all user pages.
@@ -60,13 +57,8 @@ class QuestionTest extends TestCase
 
         $response = $this->call('GET', '/user/'.$this->user->id.'/answers');
         $this->assertEquals(200, $response->status());
+        print "Done Testing testUser";
     }
-
-    public function testStope() {
-        echo 'DONE';
-    }
-
-
 
 
 }

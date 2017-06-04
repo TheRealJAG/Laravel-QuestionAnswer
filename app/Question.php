@@ -186,6 +186,9 @@ class Question extends Model {
                 }
             }
         }
+
+        // Give a vote to the new question by author
+        Vote::vote($user_id, $question->id, 1, 'question_id');
         return $question;
     }
 
