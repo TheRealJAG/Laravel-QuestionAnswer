@@ -14,6 +14,8 @@
                                 </div>
                                 @if( !Auth::check() )
                                     <p>You must be registered and logged in to ask a question. <a href="/register">Register Here</a></p>
+                                @elseif(\App\Tag::count() == 0)
+                                    <p>There isn't tags registered. To ask is necessary at least one tag</p>
                                 @else
                                     {{ Form::open( array('url'=>'question','class' =>'form-horizontal') ) }}
                                     {{ Form::token() }}
