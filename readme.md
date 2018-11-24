@@ -14,8 +14,9 @@ Demo: http://qna.therealjag.com
 * x-editable: https://github.com/vitalets/x-editable
 
 ## Install
-* Clone project
-* Run Laravel migrations
+* Clone Project
+* Run Composer Install `composer install`
+* Run Laravel Migrations `php artisan migrate`
 
 ## Features
 
