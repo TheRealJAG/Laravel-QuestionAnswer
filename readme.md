@@ -15,10 +15,10 @@ Demo: http://qna.therealjag.com
 
 ## Install
 * Clone Project `git pull https://github.com/TheRealJAG/Laravel-QuestionAnswer.git`
+* Copy contents of `.env.sampple` to `.env`
+* Generate Key `php artisan key:generate`
 * Run Composer Install `composer install`
 * Run Laravel Migrations `php artisan migrate`
-* Copy contents of `.env.sampple` to `.env`
-*  Generate Key `php artisan key:generate`
 
 ## Features
 
