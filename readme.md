@@ -17,6 +17,8 @@ Demo: http://qna.therealjag.com
 * Clone Project
 * Run Composer Install `composer install`
 * Run Laravel Migrations `php artisan migrate`
+* Copy contents of `.env.sampple` to `.env`
+*  Generate Key `php artisan key:generate`
 
 ## Features
 
