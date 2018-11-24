@@ -14,7 +14,7 @@ Demo: http://qna.therealjag.com
 * x-editable: https://github.com/vitalets/x-editable
 
 ## Install
-* Clone Project
+* Clone Project `git pull https://github.com/TheRealJAG/Laravel-QuestionAnswer.git`
 * Run Composer Install `composer install`
 * Run Laravel Migrations `php artisan migrate`
 * Copy contents of `.env.sampple` to `.env`
