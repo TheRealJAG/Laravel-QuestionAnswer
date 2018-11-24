@@ -21,6 +21,9 @@ Demo: http://qna.therealjag.com
 * Generate Key `php artisan key:generate`
 * Run Laravel Migrations `php artisan migrate`
 
+## Docker LAMP
+* https://hub.docker.com/r/mattrayner/lamp/
+
 ## Features
 
 ##### General
