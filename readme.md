@@ -15,7 +15,7 @@ Demo: http://qna.therealjag.com
 
 ## Install
 * Clone Project `git pull https://github.com/TheRealJAG/Laravel-QuestionAnswer.git`
-* Copy contents of `.env.sampple` to `.env` using `cat .env.example >> .env`
+* Copy contents of `.env.sample` to `.env` using `cat .env.example >> .env`
 * Edit environment file `vim .env`
 * Run Composer Install `composer install`
 * Generate Key `php artisan key:generate`
