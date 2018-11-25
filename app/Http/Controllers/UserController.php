@@ -35,13 +35,13 @@ class UserController extends Controller
     public function answers($id) {
         $user = User::findOrFail($id);
         $answers = Answer::where('user_id', '=', $id)->orderBy('id','DESC')->paginate(10);
-        return view('user.answers')->with('user',$user)->with('answers',$answers)->with('page_title', $user->name . 'Answers');
+        return view('user.answers')->with('user',$user)->with('answers',$answers)->with('page_title', $user->name . ' Answers');
     }
 
     public function participation($id) {
         $user = User::findOrFail($id);
         $questions = User::get_participation($id);
-        return view('user.participation')->with('user',$user)->with('questions',$questions)->with('page_title', $user->name . 'Answers');
+        return view('user.participation')->with('user',$user)->with('questions',$questions)->with('page_title', $user->name . ' Answers');
     }
 
     public function notifications($id) {
@@ -51,7 +51,7 @@ class UserController extends Controller
 
         if(Auth::user()->id == $id) {
             $user = User::findOrFail($id);
-            return view('user.notifications')->with('user',$user)->with('user',$user)->with('page_title', $user->name . 'Notifications');
+            return view('user.notifications')->with('user',$user)->with('user',$user)->with('page_title', $user->name . ' Notifications');
         } else {
             abort(401, "Unauthorized");
         }
