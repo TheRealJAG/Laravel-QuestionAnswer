@@ -33,7 +33,7 @@ class Question extends Model
     // Use ->count() to get total
     public function tags()
     {
-        return $this->belongsToMany(Tag::class, 'tags_questions', 'question_id', 'tag_id');
+        return $this->belongsToMany(Tag::class, 'question_tag', 'question_id', 'tag_id');
     }
 
     /**
@@ -58,8 +58,8 @@ class Question extends Model
     public static function most_answered($tags)
     {
         return self::join('answers', 'questions.id', '=', 'answers.question_id')
-            ->join('tags_questions', 'tags_questions.question_id', '=', 'questions.id')
-            ->join('tags', 'tags.id', '=', 'tags_questions.tag_id')
+            ->join('question_tag', 'question_tag.question_id', '=', 'questions.id')
+            ->join('tags', 'tags.id', '=', 'question_tag.tag_id')
             ->select('questions.*', DB::raw('count(answers.id) as answers_ttl'))
             ->whereIn('tags.name', $tags)
             ->groupBy('questions.id')
@@ -77,8 +77,8 @@ class Question extends Model
     {
         return self::leftJoin('answers', 'questions.id', '=', 'answers.question_id')
             ->join('votes', 'questions.id', '=', 'votes.question_id')
-            ->join('tags_questions', 'tags_questions.question_id', '=', 'questions.id')
-            ->join('tags', 'tags.id', '=', 'tags_questions.tag_id')
+            ->join('question_tag', 'question_tag.question_id', '=', 'questions.id')
+            ->join('tags', 'tags.id', '=', 'question_tag.tag_id')
             ->select('questions.*', DB::raw('sum(votes.vote) as vote_ttl'))
             ->whereIn('tags.name', $tags)
             ->whereNull('answers.id')
@@ -102,13 +102,13 @@ class Question extends Model
     /**
      * Get relevant questions except for $question_id.
      * @param $tags
-     * @param $question_id
+     * @param int $question_id
      * @return mixed
      */
     public static function recent_relevant($tags, $question_id = 0)
     {
-        return self::join('tags_questions', 'tags_questions.question_id', '=', 'questions.id')
-            ->join('tags', 'tags.id', '=', 'tags_questions.tag_id')
+        return self::join('question_tag', 'question_tag.question_id', '=', 'questions.id')
+            ->join('tags', 'tags.id', '=', 'question_tag.tag_id')
             ->select('questions.*')
             ->where('questions.id', '!=', $question_id)
             ->whereIn('tags.name', $tags)
@@ -119,13 +119,14 @@ class Question extends Model
     /**
      * Returns relevant questions sorted by vote according to the tag object.
      * @param $tags - Tags array returned from get_tags()
+     * @param int $question_id
      * @return mixed
      */
     public static function top_relevant($tags, $question_id = 0)
     {
         return self::join('votes', 'questions.id', '=', 'votes.question_id')
-            ->join('tags_questions', 'tags_questions.question_id', '=', 'questions.id')
-            ->join('tags', 'tags.id', '=', 'tags_questions.tag_id')
+            ->join('question_tag', 'question_tag.question_id', '=', 'questions.id')
+            ->join('tags', 'tags.id', '=', 'question_tag.tag_id')
             ->select('questions.*', DB::raw('sum(votes.vote) as vote_ttl'))
             ->whereIn('tags.name', $tags)
             ->where('questions.id', '!=', $question_id)
@@ -173,9 +174,9 @@ class Question extends Model
      */
     public static function get_tags($id)
     {
-        return self::join('tags_questions', 'tags_questions.question_id', '=', 'questions.id')
-            ->join('tags', 'tags.id', '=', 'tags_questions.tag_id')
-            ->where('tags_questions.question_id', '=', $id)
+        return self::join('question_tag', 'question_tag.question_id', '=', 'questions.id')
+            ->join('tags', 'tags.id', '=', 'question_tag.tag_id')
+            ->where('question_tag.question_id', '=', $id)
             ->select('tags.name')
             ->get();
     }
@@ -198,7 +199,7 @@ class Question extends Model
             $tags = array_unique(explode(',', $tags));
             if (is_array($tags)) {
                 foreach ($tags as $tag) {
-                    DB::table('tags_questions')->insert(
+                    DB::table('question_tag')->insert(
                         ['tag_id' => $tag, 'question_id' => $question->id]
                     );
                 }
@@ -220,8 +221,8 @@ class Question extends Model
     {
         return self::join('answers', 'questions.id', '=', 'answers.question_id')
             ->join('votes', 'questions.id', '=', 'votes.question_id')
-            ->join('tags_questions', 'tags_questions.question_id', '=', 'questions.id')
-            ->join('tags', 'tags.id', '=', 'tags_questions.tag_id')
+            ->join('question_tag', 'question_tag.question_id', '=', 'questions.id')
+            ->join('tags', 'tags.id', '=', 'question_tag.tag_id')
             ->select('questions.*', DB::raw('sum(votes.vote) as vote_ttl'))
             ->where('questions.question', 'LIKE', '%'.$query.'%')
             ->orWhere('answers.answer', 'LIKE', '%'.$query.'%')

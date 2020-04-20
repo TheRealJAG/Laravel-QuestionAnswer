@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Classes\Url;
 use Illuminate\Database\Eloquent\Model;
 
 class Tag extends Model
@@ -10,7 +11,7 @@ class Tag extends Model
     // use count() to get number of questions per tag.
     public function questions()
     {
-        return $this->belongsToMany(Question::class, 'tags_questions', 'tag_id', 'question_id');
+        return $this->belongsToMany(Question::class, 'question_tag', 'tag_id', 'question_id');
     }
 
     /**
