@@ -43,8 +43,13 @@ class User extends Authenticatable
         return $this->hasMany('App\Vote');
     }
 
-    // Needs mysql 5.7
-    // Would allow to check past notifications
+    /**
+     *  Needs mysql 5.7
+     * Would allow to check past notifications
+     *
+     * @param $question_id
+     * @return mixed
+     */
     public static function get_meta($question_id) {
         return DB::table('notifications')
             ->where('data->question_id', '=', $question_id)

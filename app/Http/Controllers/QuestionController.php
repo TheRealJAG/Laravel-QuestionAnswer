@@ -16,7 +16,7 @@ class QuestionController extends Controller
 {
     /**
      * Display the question
-     * @param  int  $question_id
+     * @param int $id
      * @return Response
      */
     public function show($id) {
@@ -68,6 +68,7 @@ class QuestionController extends Controller
     /**
      * Get the newest questions
      * GET /questions/new
+     * @param $id
      * @return Redirect
      */
     public function edit($id) {

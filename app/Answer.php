@@ -37,6 +37,9 @@ class Answer extends Model
 
     /**
      * Update an answer
+     * @param $answer_id
+     * @param $answer
+     * @return bool
      */
     public static function update_answer($answer_id,$answer) {
         $answer_data = Answer::whereId($answer_id)->first();

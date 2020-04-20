@@ -23,25 +23,25 @@ class Url
 
     /**
      * Return a url slug
-     * @param $sting
+     * @param string $string
      * @return string
      */
-    public static function get_slug($sting) {
-        self::$string = $sting;
+    public static function get_slug($string) {
+        self::$string = $string;
 
         if (self::$remove_stop_words) {
             self::$slug = self::clean_string(self::$string);
             self::$slug = self::remove_stop_words(self::$slug);
             return self::$slug;
         } else {
-            self::$slug = self::clean_slug($sting);
+            self::$slug = self::clean_slug($string);
             return self::$slug;
         }
     }
 
     /**
      * Takes a string and turns into SEO friendly slug
-     * @param $str
+     * @param string $str
      * @return string
      */
     private static function clean_string($str) {
@@ -66,6 +66,10 @@ class Url
         return $str;
     }
 
+    /**
+     * @param string $str
+     * @return string
+     */
     private static function remove_stop_words($str) {
 
         // Array of words found not part of self::$stop_words ,will eventually be our return string

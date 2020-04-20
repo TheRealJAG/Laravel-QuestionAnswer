@@ -36,7 +36,7 @@ class Question extends Model {
 
     /**
      * Returns pagination count based on if int is > 0
-     * @param $int
+     * @param int $int
      * @return int
      */
     private static function get_pagination($int) {
@@ -139,7 +139,7 @@ class Question extends Model {
 
     /**
      * Returns relevant questions sorted by vote count
-     * @param $limit - Number of questions to return
+     * @param int $limit - Number of questions to return
      * @return mixed
      */
     public static function top_limited($limit) {
@@ -168,6 +168,9 @@ class Question extends Model {
 
     /**
      * Insert the question to the table.
+     * @param $user_id
+     * @param $tags
+     * @param $question_text
      * @return object
      */
     public static function insert($user_id, $tags, $question_text) {
@@ -194,6 +197,7 @@ class Question extends Model {
 
     /**
      * Search
+     * @param string $query
      * @return object
      */
     public static function search($query) {
