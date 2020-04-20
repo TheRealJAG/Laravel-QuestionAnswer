@@ -28,6 +28,10 @@ class Answer extends Model
 
     /**
      * Insert an answer.
+     * @param $answer_text
+     * @param $question_id
+     * @param $user_id
+     * @return Answer
      */
     public static function insert($answer_text, $question_id, $user_id)
     {
