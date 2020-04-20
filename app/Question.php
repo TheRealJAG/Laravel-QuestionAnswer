@@ -31,7 +31,7 @@ class Question extends Model {
     // Using a relationship table or a 'pivot' table.
     // Use ->count() to get total
     public function tags() {
-        return $this->belongsToMany('App\Tag', 'tags_questions', 'question_id','tag_id');
+        return $this->belongsToMany(Tag::class, 'tags_questions', 'question_id','tag_id');
     }
 
     /**

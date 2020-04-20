@@ -110,11 +110,11 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <?php
+                                @php
                                     // todo clean this up
                                     $notif_cnt = count(Auth::user()->unreadnotifications);
                                     if ($notif_cnt > 0) echo "<li><a href='/user/".Auth::user()->id."/notifications' title='Show Notifications' style='padding: 13px 0px;'><span class='badge' style='background-color:#fff;color: #333;'>$notif_cnt Notifications</span></a></li>";
-                                ?>
+                                @endphp
                             @endif
                         </ul>
                     </div><!-- /.navbar-collapse -->
@@ -124,7 +124,8 @@
         </div>
         @yield('content')
 
-        <P><center>
+        <p>
+        <center>
             <!-- Place this tag in your head or just before your close body tag. -->
             <script async defer src="https://buttons.github.io/buttons.js"></script>
             <!-- Place this tag where you want the button to render. -->
@@ -136,7 +137,8 @@
             <br>
             <a href="https://github.com/TheRealJAG/Laravel-QnA">Powered by Laravel</a>
 
-        </center></P>
+        </center>
+        </p>
 
     </div>
     @include('modals.login')
