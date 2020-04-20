@@ -30,7 +30,7 @@ $shown = false;
             <span>
                 <small><strong>
                         Submitted {{date('F dS Y', strtotime($question->created_at))}} by <a href="/user/{{$question->user->id}}"  title="{{ $question->user->name }}">{{ucfirst($question->user->name)}}</a>
-                        {{ $answer_number >= 1 ? $answer_number . ' ' . str_plural('answer', $answer_number) : ''  }}
+                        {{ $answer_number >= 1 ? $answer_number . ' ' . Str::plural('answer', $answer_number) : ''  }}
                         @if ($question->user_id == Auth::id())
                             | <a href="/question/edit/{{$question->id}}">edit question</a>
                         @endif

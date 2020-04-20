@@ -17,7 +17,7 @@ $shown = false;
                 <small>
                     <strong>
                         {{date('F dS Y', strtotime($question->created_at))}}
-                        {{ $answer_number >= 1 ? ' with ' . $answer_number . ' ' . str_plural('answer', $answer_number) : ''  }}
+                        {{ $answer_number >= 1 ? ' with ' . $answer_number . ' ' . Str::plural('answer', $answer_number) : ''  }}
                     </strong>
                 </small>
             </span>
