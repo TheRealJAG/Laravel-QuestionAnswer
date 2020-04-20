@@ -6,29 +6,27 @@ use App\Answer;
 use App\Question;
 use App\User;
 use App\Vote;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class QuestionTest extends TestCase
 {
+
+    use RefreshDatabase;
+
     public function testQuestion()
     {
         // Test inserting a user
         $this->user = factory(User::class)->create();
-        if (! $this->user) {
-            return false;
-        }
+        $this->assertSame(1, User::count());
 
         // Test inserting a question with user data
         $this->question = Question::insert($this->user->id, '', 'I\'m just a test question. Please delete me. Thank you!');
-        if (! $this->question) {
-            return false;
-        }
+        $this->assertSame(1, Question::count());
 
         // Test a simple answer to that question
         $this->answer = Answer::insert('I\'m a lonely test comment.', $this->question->id, $this->user->id);
-        if (! $this->answer) {
-            return false;
-        }
+        self::assertSame(1, Answer::count());
 
         // Test voting on an answer
         $this->vote_answer = Vote::vote($this->user->id, $this->answer->id, 1, 'answer_id');
@@ -51,18 +49,16 @@ class QuestionTest extends TestCase
     public function testUser()
     {
         $this->user = factory(User::class)->create();
-        if (! $this->user) {
-            return false;
-        }
+        $this->assertSame(1, User::count());
 
-        $response = $this->call('GET', '/user/'.$this->user->id);
-        $this->assertEquals(200, $response->status());
+        $response = $this->get('/user/'.$this->user->id);
+        $response->assertStatus(200);
 
-        $response = $this->call('GET', '/user/'.$this->user->id.'/questions');
-        $this->assertEquals(200, $response->status());
+        $response = $this->get('/user/'.$this->user->id.'/questions');
+        $response->assertStatus(200);
 
-        $response = $this->call('GET', '/user/'.$this->user->id.'/answers');
-        $this->assertEquals(200, $response->status());
+        $response = $this->get('/user/'.$this->user->id.'/answers');
+        $response->assertStatus(200);
         echo 'Done Testing testUser';
     }
 }
