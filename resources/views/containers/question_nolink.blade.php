@@ -1,4 +1,4 @@
-<?php
+@php
 // todo clean this up
 $answer_count = json_decode($question->answer_count,true);
 if (isset($answer_count[0])) {
@@ -7,7 +7,7 @@ if (isset($answer_count[0])) {
     $answer_number = 0;
 }
 $shown = false;
-?>
+@endphp
 <!-- Question Container-->
 <div class="row">
     <div class="col-xs-2 col-md-1">
