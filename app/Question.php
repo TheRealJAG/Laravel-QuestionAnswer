@@ -14,19 +14,19 @@ class Question extends Model
     // Create the relationship to users
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo(User::class);
     }
 
     // Create the relationship to answers
     public function answers()
     {
-        return $this->hasMany('App\Answer');
+        return $this->hasMany(Answer::class);
     }
 
     // Create the relationship to votes
     public function votes()
     {
-        return $this->hasMany('App\Vote');
+        return $this->hasMany(Vote::class);
     }
 
     // Using a relationship table or a 'pivot' table.
