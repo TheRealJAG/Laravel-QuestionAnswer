@@ -2,7 +2,7 @@
 
 namespace App\Notifications;
 
-use App\Classes\URL;
+use App\Classes\Url;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -54,7 +54,7 @@ class Answer extends Notification
             ->line($question->question)
             ->line($user->name . ' Said')
             ->line('"'.$this->answer['answer'].'"')
-            ->action('See All Answers', url('/question/'.$question->id .'/'.URL::get_slug($question->question)));
+            ->action('See All Answers', url('/question/'.$question->id .'/'.Url::get_slug($question->question)));
     }
 
     /**

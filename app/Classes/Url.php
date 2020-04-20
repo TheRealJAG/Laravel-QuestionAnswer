@@ -6,7 +6,7 @@ namespace App\Classes;
  * A URL helper class
  * @package App\Classes
  */
-class URL
+class Url
 {
 
     // Remove stop words from string?
