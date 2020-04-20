@@ -25,8 +25,8 @@ class QuestionController extends Controller
             [
                 'answer_ids' => Answer::get_answer_ids($question),
                 'recent_questions' => Question::top_relevant(
-                    Question::get_tags($question)->toArray(),
-                    $question
+                    Question::get_tags($question->id)->toArray(),
+                    $question->id
                 ),
                 'answers' => Answer::get_sorted($question),
                 'question' => $question,
