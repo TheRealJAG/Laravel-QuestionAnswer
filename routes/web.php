@@ -26,7 +26,7 @@ Route::get('user/{id}/answers', 'UserController@answers');
 Route::get('user/{id}/notifications', 'UserController@notifications');
 
 // Question Routes
-Route::get('question/edit/{question}', 'QuestionController@edit');
+Route::get('question/edit/{question}', 'QuestionController@edit')->middleware('can:update,post');
 Route::get('questions/top', 'QuestionController@top');
 Route::get('questions/new', 'QuestionController@newest');
 Route::get('question/{question}/{slug}', 'QuestionController@show');
