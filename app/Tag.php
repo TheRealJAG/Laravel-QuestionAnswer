@@ -3,15 +3,14 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 
 class Tag extends Model
 {
-
     // Bind question to tags
     // use count() to get number of questions per tag.
-    public function questions() {
-        return $this->belongsToMany(Question::class, 'tags_questions', 'tag_id','question_id');
+    public function questions()
+    {
+        return $this->belongsToMany(Question::class, 'tags_questions', 'tag_id', 'question_id');
     }
 
     /**
@@ -19,8 +18,8 @@ class Tag extends Model
      * @return object
      * todo this should be cached
      */
-    public static function get_tags() {
-        return Tag::distinct()->orderBy('name', 'asc')->get();
+    public static function get_tags()
+    {
+        return self::distinct()->orderBy('name', 'asc')->get();
     }
-
 }

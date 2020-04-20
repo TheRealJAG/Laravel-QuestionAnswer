@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateQnaSchema extends Migration
 {
@@ -13,9 +13,7 @@ class CreateQnaSchema extends Migration
      */
     public function up()
     {
-
-        Schema::create('users', function (Blueprint $table)
-        {
+        Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('email')->unique();
@@ -24,8 +22,7 @@ class CreateQnaSchema extends Migration
             $table->timestamps();
         });
 
-        Schema::create('questions', function(Blueprint $table)
-        {
+        Schema::create('questions', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->string('question');
@@ -35,8 +32,7 @@ class CreateQnaSchema extends Migration
             $table->foreign('user_id')->references('id')->on('users');
         });
 
-        Schema::create('answers', function(Blueprint $table)
-        {
+        Schema::create('answers', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->integer('question_id')->unsigned();
@@ -46,8 +42,7 @@ class CreateQnaSchema extends Migration
             $table->foreign('question_id')->references('id')->on('questions');
         });
 
-        Schema::create('votes', function(Blueprint $table)
-        {
+        Schema::create('votes', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->integer('question_id')->nullable()->unsigned();
@@ -59,8 +54,7 @@ class CreateQnaSchema extends Migration
             $table->foreign('answer_id')->references('id')->on('answers');
         });
 
-        Schema::create('tags', function(Blueprint $table)
-        {
+        Schema::create('tags', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('display');
@@ -68,9 +62,7 @@ class CreateQnaSchema extends Migration
             $table->softDeletes();
         });
 
-
-        Schema::create('tags_questions', function(Blueprint $table)
-        {
+        Schema::create('tags_questions', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('tag_id')->unsigned();
             $table->integer('question_id')->unsigned();
@@ -79,7 +71,6 @@ class CreateQnaSchema extends Migration
             $table->foreign('question_id')->references('id')->on('questions');
             $table->unique(['tag_id', 'question_id']);
         });
-
     }
 
     /**

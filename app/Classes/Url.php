@@ -1,14 +1,13 @@
 <?php
+
 namespace App\Classes;
 
 /**
  * Class URL
- * A URL helper class
- * @package App\Classes
+ * A URL helper class.
  */
 class Url
 {
-
     // Remove stop words from string?
     private static $remove_stop_words = true;
 
@@ -16,35 +15,39 @@ class Url
     private static $min_word_count = 3;
 
     // For SEO purposes, these are extremely common words that most search engines skip over in order to save space in their databases.
-    private static $stop_words = array("a","an","and","are","the","of","for","in","whats","or","to","how","do","you","your","they","its","if","can","test","does","on","that","was");
+    private static $stop_words = ['a', 'an', 'and', 'are', 'the', 'of', 'for', 'in', 'whats', 'or', 'to', 'how', 'do', 'you', 'your', 'they', 'its', 'if', 'can', 'test', 'does', 'on', 'that', 'was'];
 
     private static $slug;
     private static $string;
 
     /**
-     * Return a url slug
+     * Return a url slug.
      * @param string $string
      * @return string
      */
-    public static function get_slug($string) {
+    public static function get_slug($string)
+    {
         self::$string = $string;
 
         if (self::$remove_stop_words) {
             self::$slug = self::clean_string(self::$string);
             self::$slug = self::remove_stop_words(self::$slug);
+
             return self::$slug;
         } else {
             self::$slug = self::clean_slug($string);
+
             return self::$slug;
         }
     }
 
     /**
-     * Takes a string and turns into SEO friendly slug
+     * Takes a string and turns into SEO friendly slug.
      * @param string $str
      * @return string
      */
-    private static function clean_string($str) {
+    private static function clean_string($str)
+    {
         $str = strtolower(strip_tags(trim($str)));
 
         // Preserve escaped octets.
@@ -70,17 +73,19 @@ class Url
      * @param string $str
      * @return string
      */
-    private static function remove_stop_words($str) {
+    private static function remove_stop_words($str)
+    {
 
         // Array of words found not part of self::$stop_words ,will eventually be our return string
-        $slug_parts = array_diff( explode( '-', $str ), self::$stop_words );
+        $slug_parts = array_diff(explode('-', $str), self::$stop_words);
 
         // Return sanitized string if less/equal self::$min_word_count words after removing stop words
-        if ( count( $slug_parts ) <= self::$min_word_count )
+        if (count($slug_parts) <= self::$min_word_count) {
             return $str;
+        }
 
         // Turn the sanitized array into a string.
-        $slug = join( '-', $slug_parts );
+        $slug = implode('-', $slug_parts);
 
         return $slug;
     }

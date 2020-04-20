@@ -3,11 +3,9 @@
 namespace App;
 
 //use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
-
-use App\Question;
 
 class User extends Authenticatable
 {
@@ -18,7 +16,8 @@ class User extends Authenticatable
      *
      * @return string
      */
-    public function routeNotificationForMail() {
+    public function routeNotificationForMail()
+    {
         return $this->email;
     }
 
@@ -40,18 +39,20 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function votes() {
+    public function votes()
+    {
         return $this->hasMany('App\Vote');
     }
 
     /**
      *  Needs mysql 5.7
-     * Would allow to check past notifications
+     * Would allow to check past notifications.
      *
      * @param $question_id
      * @return mixed
      */
-    public static function get_meta($question_id) {
+    public static function get_meta($question_id)
+    {
         return DB::table('notifications')
             ->where('data->question_id', '=', $question_id)
             ->get();
