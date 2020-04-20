@@ -32,6 +32,11 @@ class Vote extends Model
         return $this->belongsTo(Answer::class);
     }
 
+    public function question()
+    {
+        return $this->belongsTo(Question::class);
+    }
+
     /**
      * Insert/Update & Delete from votes table
      * If identical previous/new vote destroy otherwise insert/update.
