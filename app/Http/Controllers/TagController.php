@@ -10,58 +10,72 @@ class TagController extends Controller
     /**
      * Show new tag questions.
      *
-     * @param  string  $name
+     * @param Tag $tag
      * @return Response
      */
-    public function show_new($name)
+    public function show_new(Tag $tag)
     {
-        $tag = Tag::select('name')->where('name', '=', $name)->first();
-
-        if (empty($tag)) {
-            abort(404, 'Page Not Found');
-        }
-
-        return view('tag', ['tag_info' => $tag, 'questions' => Question::recent_relevant($tag->toArray()), 'page_title' => 'Newest '.$tag->name.' Questions', 'sort' => 'new', 'tags' => Tag::get_tags()]);
+        return view('tag',
+                    [
+                        'tag_info' => $tag,
+                        'questions' => Question::recent_relevant($tag->pluck('name')->toArray()),
+                        'page_title' => 'Newest ' . $tag->name . ' Questions',
+                        'sort' => 'new',
+                        'tags' => Tag::get_tags()
+                    ]
+        );
     }
 
     /**
      * Show show top tag questions.
      *
-     * @param  string  $name
+     * @param Tag $tag
      * @return Response
      */
-    public function show_top($name)
+    public function show_top(Tag $tag)
     {
-        $tag = Tag::select('name')->where('name', '=', $name)->first();
-
-        return view('tag', ['tag_info' => $tag, 'questions' => Question::top_relevant($tag->toArray()), 'page_title' => 'Top '.$tag->name.' Questions', 'sort' => 'top', 'tags' => Tag::get_tags()]);
+        return view('tag',
+                    [
+                        'tag_info' => $tag,
+                        'questions' => Question::top_relevant($tag->pluck('name')->toArray()),
+                        'page_title' => 'Top ' . $tag->name . ' Questions',
+                        'sort' => 'top',
+                        'tags' => Tag::get_tags()
+                    ]
+        );
     }
 
     /**
      * Get the top questions according to votes.
-     * @param  string  $name
-     * GET /questions/top
-     * @return Redirect
+     * @param Tag $tag
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show_most_answered($name)
+    public function show_most_answered(Tag $tag)
     {
-        $tag = Tag::select('name')->where('name', '=', $name)->first();
-        $questions = Question::most_answered($tag->toArray());
-
-        return view('tag', ['tag_info' => $tag, 'questions' => $questions, 'page_title' => 'Most Answered '.$tag->name.' Questions', 'sort' => 'top_answered']);
+        return view('tag',
+                    [
+                        'tag_info' => $tag,
+                        'questions' => Question::most_answered($tag->pluck('name')->toArray()),
+                        'page_title' => 'Most Answered ' . $tag->name . ' Questions',
+                        'sort' => 'top_answered'
+                    ]
+        );
     }
 
     /**
      * Get unanswered questions according to votes.
-     * @param  string  $name
-     * GET /questions/top
-     * @return Redirect
+     * @param Tag $tag
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show_unanswered($name)
+    public function show_unanswered(Tag $tag)
     {
-        $tag = Tag::select('name')->where('name', '=', $name)->first();
-        $questions = Question::unanswered($tag->toArray());
-
-        return view('tag', ['tag_info' => $tag, 'questions' => $questions, 'page_title' => 'Unanswered '.$tag->name.' Questions', 'sort' => 'not_answered']);
+        return view('tag',
+                    [
+                        'tag_info' => $tag,
+                        'questions' => Question::unanswered($tag->pluck('name')->toArray()),
+                        'page_title' => 'Unanswered ' . $tag->name . ' Questions',
+                        'sort' => 'not_answered'
+                    ]
+        );
     }
 }

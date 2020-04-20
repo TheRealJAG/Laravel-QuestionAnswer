@@ -42,10 +42,10 @@ Route::post('answer', ['before'=>'csfr', 'uses'=>'AnswerController@insert']);
 Route::post('answer/update', ['before'=>'csfr', 'uses'=>'AnswerController@update']);
 
 // Tag Routes
-Route::get('tag/{id}', 'TagController@show_new');
-Route::get('tag/{id}/top', 'TagController@show_top');
-Route::get('tag/{id}/most_answered', 'TagController@show_most_answered');
-Route::get('tag/{id}/unanswered', 'TagController@show_unanswered');
+Route::get('tag/{tag:name}', 'TagController@show_new');
+Route::get('tag/{tag:name}/top', 'TagController@show_top');
+Route::get('tag/{tag:name}/most_answered', 'TagController@show_most_answered');
+Route::get('tag/{tag:name}/unanswered', 'TagController@show_unanswered');
 
 // Create a quick API to get data for the tags
 Route::group(['prefix'=>'api', 'middleware' => 'auth'], function () {
