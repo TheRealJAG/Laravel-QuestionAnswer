@@ -51,8 +51,8 @@ Route::get('tag/{tag:name}/unanswered', 'TagController@show_unanswered');
 Route::group(['prefix'=>'api', 'middleware' => 'auth'], function () {
     Route::get('find', function (Illuminate\Http\Request $request) {
         $keyword = $request->input('keyword');
-        $tags = DB::table('tags')->where('name', 'like', '%'.$keyword.'%')
-            ->select('tags.id', 'tags.name', 'tags.display')
+        $tags = App\Tag::where('name', 'like', '%' . $keyword . '%')
+            ->select('id', 'name', 'display')
             ->get();
 
         return json_encode($tags);
