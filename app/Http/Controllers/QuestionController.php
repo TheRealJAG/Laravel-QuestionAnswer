@@ -15,18 +15,25 @@ class QuestionController extends Controller
 {
     /**
      * Display the question.
-     * @param int $id
+     * @param Question $question
      * @return Response
      */
-    public function show($id)
+    public function show(Question $question)
     {
-        $question = Question::find($id);
-
-        if (! $question) {
-            abort(404, 'Page Not Found');
-        }
-
-        return view('question', ['answer_ids' => Answer::get_answer_ids($id), 'recent_questions' => Question::top_relevant(Question::get_tags($id)->toArray(), $id), 'answers' => Answer::get_sorted($id), 'question' => $question, 'page_title' => $question->question, 'is_question' => true]);
+        return view(
+            'question',
+            [
+                'answer_ids' => Answer::get_answer_ids($question),
+                'recent_questions' => Question::top_relevant(
+                    Question::get_tags($question)->toArray(),
+                    $question
+                ),
+                'answers' => Answer::get_sorted($question),
+                'question' => $question,
+                'page_title' => $question->question,
+                'is_question' => true
+            ]
+        );
     }
 
     /**
@@ -74,12 +81,12 @@ class QuestionController extends Controller
     /**
      * Get the newest questions
      * GET /questions/new.
-     * @param $id
+     * @param Question $question
      * @return Redirect
      */
-    public function edit($id)
+    public function edit(Question $question)
     {
-        return view('questions.edit', ['question' => Question::find($id), 'page_title' => 'Edit Questions']);
+        return view('questions.edit', ['question' => $question, 'page_title' => 'Edit Questions']);
     }
 
     /**

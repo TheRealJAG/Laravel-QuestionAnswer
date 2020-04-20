@@ -26,10 +26,10 @@ Route::get('user/{id}/answers', 'UserController@answers');
 Route::get('user/{id}/notifications', 'UserController@notifications');
 
 // Question Routes
-Route::get('question/edit/{id}', 'QuestionController@edit');
+Route::get('question/edit/{question}', 'QuestionController@edit');
 Route::get('questions/top', 'QuestionController@top');
 Route::get('questions/new', 'QuestionController@newest');
-Route::get('question/{id}/{question}', 'QuestionController@show');
+Route::get('question/{question}/{slug}', 'QuestionController@show');
 Route::post('question', ['before'=>'csfr', 'uses'=>'QuestionController@insert']);
 Route::post('question/edit', ['before'=>'csfr', 'uses'=>'QuestionController@edit_save']);
 
