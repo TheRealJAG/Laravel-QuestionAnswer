@@ -63,8 +63,7 @@ class CreateQnaSchema extends Migration
             $table->softDeletes();
         });
 
-        //TODO: rename to question_tag
-        Schema::create('tags_questions', function (Blueprint $table) {
+        Schema::create('question_tag', function (Blueprint $table) {
             $table->id('id');
             $table->foreignId('tag_id');
             $table->foreignId('question_id');
@@ -82,7 +81,7 @@ class CreateQnaSchema extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tags_questions');
+        Schema::dropIfExists('question_tag');
         Schema::dropIfExists('tags');
         Schema::dropIfExists('votes');
         Schema::dropIfExists('answers');
