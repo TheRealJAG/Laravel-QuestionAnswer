@@ -2,18 +2,15 @@
 
 namespace App\Notifications;
 
-use App\Classes\URL;
-use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Notification;
-use Illuminate\Notifications\Messages\MailMessage;
-
+use App\Classes\Url;
 use App\Question;
 use App\User;
 use Carbon;
+use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Notification;
 
 class Answer extends Notification
 {
-
     protected $answer;
 
     /**
@@ -34,7 +31,7 @@ class Answer extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail','database'];
+        return ['mail', 'database'];
     }
 
     /**
@@ -52,9 +49,9 @@ class Answer extends Notification
             ->subject('Someone Answered Your Question')
             ->greeting('Someone Answered Your Question!')
             ->line($question->question)
-            ->line($user->name . ' Said')
+            ->line($user->name.' Said')
             ->line('"'.$this->answer['answer'].'"')
-            ->action('See All Answers', url('/question/'.$question->id .'/'.URL::get_slug($question->question)));
+            ->action('See All Answers', url('/question/'.$question->id.'/'.Url::get_slug($question->question)));
     }
 
     /**
@@ -66,6 +63,7 @@ class Answer extends Notification
     public function toDatabase($notifiable)
     {
         $question = Question::find($this->answer['question_id']);
+
         return [
             'question_id' => $question->id,
             'answer_id' => $this->answer['id'],

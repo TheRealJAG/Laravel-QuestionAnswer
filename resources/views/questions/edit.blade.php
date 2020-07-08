@@ -1,17 +1,11 @@
-<?php
+@php
 // todo edit tags
 foreach( $question->tags as $tag ) {
    $arr[] = $tag->name;
 }
 $commaList = implode(',', $arr);
 
-// todo cleanup
-// user is not authorized to edit
-if ($question->user_id != Auth::id()) {
-    echo 'nice try';
-    exit;
-}
-?>
+@endphp
 @extends('layouts.app')
 @section('content')
     <div class="container">

@@ -2,35 +2,39 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Auth;
 use App\Events\VoteEvent;
+use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Vote
- *
- * @package App
+ * Class Vote.
  */
 class Vote extends Model
 {
     protected $events = [
         'created' => VoteEvent::class,
-        'updated' => VoteEvent::class
+        'updated' => VoteEvent::class,
     ];
 
     protected $fillable = [
         'user_id',
         'answer_id',
         'question_id',
-        'vote'
+        'vote',
     ];
 
-    public function user() {
-        return $this->belongsTo('App\User');
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
-    public function answer() {
-        return $this->belongsTo('App\Answer');
+    public function answer()
+    {
+        return $this->belongsTo(Answer::class);
+    }
+
+    public function question()
+    {
+        return $this->belongsTo(Question::class);
     }
 
     /**
@@ -42,15 +46,17 @@ class Vote extends Model
      * @param $column - the vote table uses question_id or answer_id
      * @return array
      */
-    public static function vote($user_id, $id, $vote, $column) {
-        $voted = Vote::where('user_id', $user_id)->where($column, $id)->first();
-        if (isset($voted->vote) && $voted->vote == $vote)  {
-            Vote::destroy($voted->id);
-            $ajax_response = array('status' => 'success','msg' => "Vote nullified on $column $id");
+    public static function vote($user_id, $id, $vote, $column)
+    {
+        $voted = self::where('user_id', $user_id)->where($column, $id)->first();
+        if (isset($voted->vote) && $voted->vote == $vote) {
+            self::destroy($voted->id);
+            $ajax_response = ['status' => 'success', 'msg' => "Vote nullified on $column $id"];
         } else {
-            Vote::updateOrCreate([$column => $id,'user_id' => $user_id],['vote' => $vote]);
-            $ajax_response = array('status' => 'success','msg' => "Vote cast on $column $id");
+            self::updateOrCreate([$column => $id, 'user_id' => $user_id], ['vote' => $vote]);
+            $ajax_response = ['status' => 'success', 'msg' => "Vote cast on $column $id"];
         }
+
         return $ajax_response;
     }
 }

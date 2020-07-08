@@ -3,19 +3,14 @@
 namespace App\Listeners;
 
 use App\Events\AnswerEvent;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
-
+use App\Notifications\Answer;
+use App\Question;
+use App\User;
 use Illuminate\Notifications\Notifiable;
 use Notification;
 
-use App\User;
-use App\Question;
-use App\Notifications\Answer;
-
 class AnswerListener
 {
-
     use Notifiable;
 
     /**

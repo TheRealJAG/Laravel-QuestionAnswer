@@ -2,15 +2,10 @@
 
 namespace App\Notifications;
 
-use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
-use Illuminate\Notifications\Messages\MailMessage;
-
-use Carbon;
 
 class Vote extends Notification
 {
-
     protected $vote;
 
     /**
@@ -42,10 +37,6 @@ class Vote extends Notification
      */
     public function toDatabase($notifiable)
     {
-
-
-
-
         return [
             'question_id' => $this->vote['question_id'],
             'user_id' => $this->vote['user_id'],

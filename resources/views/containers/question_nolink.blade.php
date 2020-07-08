@@ -1,4 +1,4 @@
-<?php
+@php
 // todo clean this up
 $answer_count = json_decode($question->answer_count,true);
 if (isset($answer_count[0])) {
@@ -7,7 +7,7 @@ if (isset($answer_count[0])) {
     $answer_number = 0;
 }
 $shown = false;
-?>
+@endphp
 <!-- Question Container-->
 <div class="row">
     <div class="col-xs-2 col-md-1">
@@ -21,10 +21,10 @@ $shown = false;
         {{ Form::close() }}
     </div>
     <div class="col-xs-10 col-md-11">
-        <h1 style="color: #000;font-weight: bolder;margin-top: 0;">{{ e($question->question) }}</h1>
+        <h1 style="color: #000;font-weight: bolder;margin-top: 0;">{{ $question->question }}</h1>
         @if ( !$question->tags->isEmpty() )
             @foreach( $question->tags as $tag )
-                <a href="/tag/{{ App\Classes\URL::get_slug($tag->name) }}" title="{{ $tag->name }}"><button type="button" class="btn btn-primary btn-xs"><i class="fa fa-hashtag" style="color: white;font-weight: lighter;"></i> {{ $tag->name }}</button></a>
+                <a href="/tag/{{ App\Classes\Url::get_slug($tag->name) }}" title="{{ $tag->name }}"><button type="button" class="btn btn-primary btn-xs"><i class="fa fa-hashtag" style="color: white;font-weight: lighter;"></i> {{ $tag->name }}</button></a>
             @endforeach
         @endif
         <span>

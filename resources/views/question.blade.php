@@ -21,7 +21,7 @@
                                     {{ Form::open( array('url'=>'answer','class' =>'form-horizontal') ) }}
                                     {{ Form::token() }}
                                     {{ Form::hidden('question_id',$question->id) }}
-                                    {{ Form::hidden('question_url', App\Classes\URL::get_slug($question->question)) }}
+                                    {{ Form::hidden('question_url', App\Classes\Url::get_slug($question->question)) }}
 
                                     <div class="form-group">
                                         <div class="col-md-10">

@@ -7,6 +7,16 @@ use Illuminate\Support\ServiceProvider;
 class AppServiceProvider extends ServiceProvider
 {
     /**
+     * Register any application services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        //
+    }
+
+    /**
      * Bootstrap any application services.
      *
      * @return void
@@ -15,18 +25,8 @@ class AppServiceProvider extends ServiceProvider
     {
         // Bind the tags to the tag container
         // This way it's not necessary to pass in controllers.
-        view()->composer('containers.tags',function ($view) {
+        view()->composer('containers.tags', function ($view) {
             $view->with('tags', \App\Tag::get_tags());
         });
-    }
-
-    /**
-     * Register any application services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        //
     }
 }

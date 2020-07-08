@@ -3,20 +3,14 @@
 namespace App\Listeners;
 
 use App\Events\VoteEvent;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
-
+use App\Notifications\Vote;
+use App\Question;
+use App\User;
 use Illuminate\Notifications\Notifiable;
 use Notification;
 
-use App\User;
-use App\Question;
-use App\Notifications\Vote;
-use Illuminate\Support\Facades\Log;
-
 class VoteListener
 {
-
     use Notifiable;
 
     /**
@@ -38,10 +32,10 @@ class VoteListener
     public function handle(VoteEvent $event)
     {
         $vote = $event->vote->toArray();
-            if (isset($vote['question_id'])) {
-                $question = Question::find($vote['question_id']);
-                $user = User::find($question->user_id);
-                Notification::send($user, new Vote($vote));
-            }
+        if (isset($vote['question_id'])) {
+            $question = Question::find($vote['question_id']);
+            $user = User::find($question->user_id);
+            Notification::send($user, new Vote($vote));
+        }
     }
 }
